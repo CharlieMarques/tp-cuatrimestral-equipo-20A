@@ -22,6 +22,46 @@ namespace Negocio
             connection = new SqlConnection("server=.\\SQLEXPRESS; database=Ecommerce_Equipo20A; integrated security=true");
             command = new SqlCommand();
         }
+
+        public void read()
+        {
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public void executeQuery()
+        {
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public void closeConnection()
+        {
+            if(reader != null)     
+                reader.Close();
+            connection.Close();
+        }
+        public void setQuery(string query)
+        {
+            command.CommandType = System.Data.CommandType.Text;
+            command.CommandText = query;    
+        }
     }
 }
 

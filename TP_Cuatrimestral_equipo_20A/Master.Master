@@ -14,43 +14,41 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar scroll</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Link
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Link</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+        <header>
+            <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
+                <div class="d-inline text-center">
+                    <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
+                    <span>con tu cuenta o </span>
+                    <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
+                    <span>Para recibir las ultimas promociones</span>
                 </div>
             </div>
-        </nav>
+            <nav class="navbar navbar-expand-lg navColor">
+
+                <div class="container">
+                    <div class="mx-auto d-flex align-items-center">
+                        <a class="navbar-brand" href="Default.aspx">
+                            <img src="Images/logo.png" alt="Logo" width="70" height="70" />
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        --
+                            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                                <div class="navbar-nav">
+                                    <div class="divBuscador">
+                                        <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
+                                        <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />
+                                        <asp:Button runat="server" ID="btnBuscar" CssClass="btnBusca" Text="Buscar" />
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </nav>
+            <Label for="ddlCategoria" class="form-label">Categorias<Label>
+            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control"></asp:DropDownList>
+        </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
