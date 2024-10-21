@@ -46,8 +46,7 @@
                     </div>
                 </div>
             </nav>
-            <Label for="ddlCategoria" class="form-label">Categorias<Label>
-            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control"></asp:DropDownList>
+            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" ><asp:ListItem Text="Categorías" Value="" /></asp:DropDownList>
         </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

@@ -16,7 +16,13 @@ namespace TP_Cuatrimestral_equipo_20A
             CategoriaDB categoriaDB = new CategoriaDB();
             try
             {
-                if(!IsPostBack)
+                if (Page is Login || Page is SignUp)
+                {
+                    ddlCategoria.Visible = false;
+                    
+                    //lblCategoria.Visible = false;
+                }
+                if (!IsPostBack)
                 {
                     List<Categoria> listCategoria = categoriaDB.toList();
                     ddlCategoria.DataSource = listCategoria;
