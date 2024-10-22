@@ -19,8 +19,7 @@ namespace TP_Cuatrimestral_equipo_20A
                 if (Page is Login || Page is SignUp)
                 {
                     ddlCategoria.Visible = false;
-                    
-                    //lblCategoria.Visible = false;
+                                      
                 }
                 if (!IsPostBack)
                 {
@@ -36,6 +35,11 @@ namespace TP_Cuatrimestral_equipo_20A
 
                 throw ex;
             }
+        }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx",false);
         }
     }
 }

@@ -33,7 +33,7 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        --
+                        
                             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div class="navbar-nav">
                                     <div class="divBuscador">
@@ -46,7 +46,9 @@
                     </div>
                 </div>
             </nav>
-            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" ><asp:ListItem Text="Categorías" Value="" /></asp:DropDownList>
+            <div class="col-1">
+            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" ><asp:ListItem Text="Categorías" Value=""/></asp:DropDownList>
+            </div>
         </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

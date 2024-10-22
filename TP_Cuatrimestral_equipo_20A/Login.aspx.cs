@@ -13,5 +13,10 @@ namespace TP_Cuatrimestral_equipo_20A
         {
 
         }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
