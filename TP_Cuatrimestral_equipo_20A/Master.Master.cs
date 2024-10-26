@@ -16,7 +16,6 @@ namespace TP_Cuatrimestral_equipo_20A
             CategoriaDB categoriaDB = new CategoriaDB();
             UsuarioDB usuarioDB = new UsuarioDB();
             PedidoDB pedidoDB = new PedidoDB();
-            DetallePedidoDB detallePedidoDB = new DetallePedidoDB();
 
             try
             {
@@ -29,7 +28,6 @@ namespace TP_Cuatrimestral_equipo_20A
                     List<Categoria> listCategoria = categoriaDB.toList();
                     List<Usuario> listUsuario = usuarioDB.toList();
                     List<Pedido> listPedido = pedidoDB.toList();
-                    List<DetallePedido> listDetallPedido = detallePedidoDB.toList();
 
                     ddlCategoria.DataSource = listCategoria;
                     ddlCategoria.DataTextField = "descripcion";

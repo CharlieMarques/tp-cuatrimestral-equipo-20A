@@ -26,8 +26,9 @@ namespace Negocio
                 aux.precio = (decimal)data.Reader["Precio"];
                 int idMarca = (int)data.Reader["IdMarca"];
                 int idCategoria = (int)data.Reader["IdCategoria"];
-                aux.marca = new MarcaDB().getById(idMarca); // Fetch complete Marca
-                aux.categoria = new CategoriaDB().getById(idCategoria); // Fetch complete Categoria
+                aux.marca = new MarcaDB().getById(idMarca);
+                aux.categoria = new CategoriaDB().getById(idCategoria);
+                aux.imagenes = new ImagenDB().getById((int)data.Reader["Id"]);
                 list.Add(aux);
             }
             return list;
@@ -52,8 +53,9 @@ namespace Negocio
                         nombre = (string)data.Reader["Nombre"],
                         descripcion = (string)data.Reader["Descripcion"],
                         precio = (decimal)data.Reader["Precio"],
-                        marca = new MarcaDB().getById((int)data.Reader["IdMarca"]), // Fetch complete Marca
-                        categoria = new CategoriaDB().getById((int)data.Reader["IdCategoria"]) // Fetch complete Categoria
+                        marca = new MarcaDB().getById((int)data.Reader["IdMarca"]),
+                        categoria = new CategoriaDB().getById((int)data.Reader["IdCategoria"]),
+                        imagenes = new ImagenDB().getById((int)data.Reader["Id"])
                     };
                 }
                 return producto;
