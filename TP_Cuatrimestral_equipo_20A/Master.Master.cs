@@ -14,16 +14,23 @@ namespace TP_Cuatrimestral_equipo_20A
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriaDB categoriaDB = new CategoriaDB();
+            UsuarioDB usuarioDB = new UsuarioDB();
+            PedidoDB pedidoDB = new PedidoDB();
+            DetallePedidoDB detallePedidoDB = new DetallePedidoDB();
+
             try
             {
                 if (Page is Login || Page is SignUp)
                 {
                     ddlCategoria.Visible = false;
-                                      
                 }
                 if (!IsPostBack)
                 {
                     List<Categoria> listCategoria = categoriaDB.toList();
+                    List<Usuario> listUsuario = usuarioDB.toList();
+                    List<Pedido> listPedido = pedidoDB.toList();
+                    List<DetallePedido> listDetallPedido = detallePedidoDB.toList();
+
                     ddlCategoria.DataSource = listCategoria;
                     ddlCategoria.DataTextField = "descripcion";
                     ddlCategoria.DataValueField = "id";

@@ -8,15 +8,15 @@ namespace Dominio
 {
     public class Imagen
     {
-        public int Id { get; set; }
-        public int IdProducto { get; set; }
-        public string UrlImagen { get; set; }
+        public int id { get; set; }
+        public int idProducto { get; set; }
+        public string urlImagen { get; set; }
         public Imagen() { }
-        public Imagen(int Id_, int IdProducto_, string UrlImagen_)
+        public Imagen(int id_, int idProducto_, string urlImagen_)
         {
-            Id = Id_;
-            IdProducto = IdProducto_;
-            UrlImagen = UrlImagen_;
+            id = id_;
+            idProducto = idProducto_;
+            urlImagen = urlImagen_;
         }
     }
 }

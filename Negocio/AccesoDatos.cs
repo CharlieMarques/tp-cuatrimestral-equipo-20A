@@ -62,6 +62,10 @@ namespace Negocio
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = query;    
         }
+        public void setParameter(string nombre, object valor)
+        {
+            command.Parameters.AddWithValue(nombre, valor);
+        }
     }
 }
 
