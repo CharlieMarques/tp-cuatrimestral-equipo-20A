@@ -14,7 +14,7 @@ namespace TP_Cuatrimestral_equipo_20A
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriaDB categoriaDB = new CategoriaDB();
-            UsuarioDB usuarioDB = new UsuarioDB();
+            //UsuarioDB usuarioDB = new UsuarioDB();
             PedidoDB pedidoDB = new PedidoDB();
 
             try
@@ -26,8 +26,8 @@ namespace TP_Cuatrimestral_equipo_20A
                 if (!IsPostBack)
                 {
                     List<Categoria> listCategoria = categoriaDB.toList();
-                    List<Usuario> listUsuario = usuarioDB.toList();
-                    List<Pedido> listPedido = pedidoDB.toList();
+                    //List<Usuario> listUsuario = usuarioDB.toList();
+                   // List<Pedido> listPedido = pedidoDB.toList();
 
                     ddlCategoria.DataSource = listCategoria;
                     ddlCategoria.DataTextField = "descripcion";

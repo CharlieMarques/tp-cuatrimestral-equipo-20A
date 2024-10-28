@@ -10,10 +10,12 @@
     <div class="mb-3">
             <label for="txtUser" class="form-label">Usuario</label>
             <asp:TextBox runat="server"  CssClass="form-control" ID="txtUser"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="mgsError" ErrorMessage="Ingrese el nombre de usuario" ControlToValidate="txtUser" ForeColor="DarkRed" runat="server" />
         </div>
         <div class="mb-3">
             <label class="form-label">Password</label>
             <asp:TextBox runat="server" cssclass="form-control" ID="txtPassword" placeholder="********" TextMode="Password"/>
+            <asp:RequiredFieldValidator ErrorMessage="Ingrese la contraseña" ControlToValidate="txtPassword" ForeColor="DarkRed" runat="server" />
         </div>
         <asp:Button Text="Ingresar" cssclass="btn btn-primary" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
         <a href="/">Cancelar</a>
