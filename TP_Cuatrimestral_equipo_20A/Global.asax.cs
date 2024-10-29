@@ -39,7 +39,7 @@ namespace TP_Cuatrimestral_equipo_20A
         {
 
         }
-
+        /*
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exc = Server.GetLastError();
@@ -47,7 +47,7 @@ namespace TP_Cuatrimestral_equipo_20A
             Session.Add("error", exc.ToString());
             Server.Transfer("Error.aspx", false);
         }
-
+        */
         protected void Session_End(object sender, EventArgs e)
         {
 

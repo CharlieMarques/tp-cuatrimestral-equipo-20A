@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    internal class ProductoDB
+    public class ProductoDB
     {
         public List<Producto> toList()
         {

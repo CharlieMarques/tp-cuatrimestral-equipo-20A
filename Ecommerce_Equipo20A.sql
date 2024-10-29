@@ -1,12 +1,10 @@
 /* use master
 create Database Ecommerce_Equipo20A
 go
-*/
 
 use Ecommerce_Equipo20A
 go
 
-/*
 create table MARCAS(
 	Id int identity (1,1) not null primary key,
 	Descripcion varchar (50) not null,
