@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "..\Dominio\Domin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "..\Negocio\Negocio.csproj", "{1B201985-43F7-4893-9CAF-27D69ECFE407}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppToolKit", "..\AppToolKit\AppToolKit.csproj", "{C9ADA50F-45B4-4522-8E48-D5C8389D9353}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1B201985-43F7-4893-9CAF-27D69ECFE407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B201985-43F7-4893-9CAF-27D69ECFE407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B201985-43F7-4893-9CAF-27D69ECFE407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9ADA50F-45B4-4522-8E48-D5C8389D9353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9ADA50F-45B4-4522-8E48-D5C8389D9353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9ADA50F-45B4-4522-8E48-D5C8389D9353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9ADA50F-45B4-4522-8E48-D5C8389D9353}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

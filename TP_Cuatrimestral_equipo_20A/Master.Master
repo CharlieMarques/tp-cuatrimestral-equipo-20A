@@ -15,6 +15,8 @@
 <body>
     <form id="form1" runat="server">
         <header>
+            <%if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+                { %>
             <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
                 <div class="d-inline text-center">
                     <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
@@ -23,6 +25,16 @@
                     <span>Para recibir las ultimas promociones</span>
                 </div>
             </div>
+            <%}
+                else
+                { %>
+            <div class="container-Cuenta d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
+                <div class="d-inline text-center">
+                    <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
+                    <asp:Label  id="lblNombre" Text="" runat="server" />
+                </div>
+            </div>
+            <%} %>
             <nav class="navbar navbar-expand-lg navColor">
 
                 <div class="container">
@@ -33,21 +45,23 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        
-                            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                                <div class="navbar-nav">
-                                    <div class="divBuscador">
-                                        <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
-                                        <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />
-                                        <asp:Button runat="server" ID="btnBuscar" CssClass="btnBusca" Text="Buscar" />
-                                    </div>
+
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <div class="divBuscador">
+                                    <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
+                                    <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />
+                                    <asp:Button runat="server" ID="btnBuscar" CssClass="btnBusca" Text="Buscar" />
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </nav>
             <div class="col-1">
-            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" ><asp:ListItem Text="Categorías" Value=""/></asp:DropDownList>
+                <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
+                    <asp:ListItem Text="Categorías" Value="" />
+                </asp:DropDownList>
             </div>
         </header>
         <div>

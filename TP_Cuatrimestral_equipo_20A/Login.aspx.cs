@@ -37,7 +37,7 @@ namespace TP_Cuatrimestral_equipo_20A
                    Cliente cliente = clienteDB.cargarDatosCliente(cuenta.Id);
                     Session.Add("cuenta", cuenta);
                     Session.Add("cliente", cliente);
-                    Response.Redirect("MiPerfil.aspx", false);
+                    Response.Redirect("Default.aspx", false);
                 }
 
             }

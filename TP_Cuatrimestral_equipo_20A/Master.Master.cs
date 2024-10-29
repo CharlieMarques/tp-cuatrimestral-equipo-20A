@@ -16,6 +16,7 @@ namespace TP_Cuatrimestral_equipo_20A
             CategoriaDB categoriaDB = new CategoriaDB();
             //UsuarioDB usuarioDB = new UsuarioDB();
             PedidoDB pedidoDB = new PedidoDB();
+            ClienteDB clienteDB = new ClienteDB();
 
             try
             {
@@ -40,11 +41,18 @@ namespace TP_Cuatrimestral_equipo_20A
 
                 throw ex;
             }
+            if (AppToolKit.Session.sessionActiva(Session["cuenta"]))
+            {
+                Cuenta cuenta = (Cuenta)Session["cuenta"];
+                // Cliente cliente = clienteDB.cargarDatosCliente(cuenta.Id);
+                Cliente cliente = (Cliente)Session["cliente"];
+                lblNombre.Text = "Bienvenido " + cliente.Nombre + " ";
+            }
         }
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx",false);
+            Response.Redirect("Categorias.aspx",false);
         }
     }
 }
