@@ -55,8 +55,11 @@ namespace TP_Cuatrimestral_equipo_20A
                             {
                                 //int id = cuentaDB.nuevaCuenta(cuenta);
                                 clienteDB.nuevoCliente(cliente, cuentaDB.nuevaCuenta(cuenta));
+                                cuentaDB.CambiarNivelAcceso(cuenta.Id, 1);
+                                Session.Add("cuenta", cuenta);
+                                Session.Add("cliente", cliente);
 
-                                Response.Redirect("Login.aspx", false);                         
+                                Response.Redirect("Default.aspx", false);                         
                             }
 
                         }

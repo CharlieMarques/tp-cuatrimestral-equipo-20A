@@ -110,5 +110,25 @@ namespace Negocio
                 data.closeConnection();
             }
         }
+        public void CambiarNivelAcceso(int id, int nivel)
+        {
+            AccesoDatos data = new AccesoDatos();
+            try
+            {
+                data.setQuery("Update Cuentas set nivelAcceso = @lvlAcceso  where Id = @id");
+                data.setParameter("@lvlAcceso", nivel);
+                data.setParameter("@id", id);
+                data.executeQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.closeConnection();
+            }
+        }
     }
 }

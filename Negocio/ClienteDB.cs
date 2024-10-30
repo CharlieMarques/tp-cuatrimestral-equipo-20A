@@ -68,5 +68,35 @@ namespace Negocio
                 data.closeConnection(); 
             }
         }
+        public bool modificarCliente(Cliente cliente)
+        {
+            AccesoDatos data = new AccesoDatos();
+
+            try
+            {
+                data.setQuery("Update Clientes set Nombre = @nombre, Apellido= @apellido, nroDocumento=@dni,nroTelefono = @telefono where idCuenta = @idCuenta and Id= @idCliente");
+                data.setParameter("@nombre", cliente.Nombre);
+                data.setParameter("@apellido", cliente.Apellido);
+                data.setParameter("@dni", cliente.NroDocumento);
+                data.setParameter("@telefono", cliente.Telefono);
+                data.setParameter("@idCuenta", cliente.cuenta.Id);
+                data.setParameter("@idCliente", cliente.Id);
+                data.executeQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                data.closeConnection();
+            }
+
+            
+
+            
+        }
     }
 }

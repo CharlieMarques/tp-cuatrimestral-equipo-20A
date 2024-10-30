@@ -12,7 +12,7 @@ namespace AppToolKit
         public static bool sessionActiva(object cuentita)
         {
             Cuenta cuenta = cuentita != null ? (Cuenta)cuentita : null;
-            if (cuenta != null && cuenta.Id !=0)
+            if (cuenta != null )
                     return true;
             return false;           
         }
