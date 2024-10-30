@@ -1,5 +1,6 @@
 ﻿using Dominio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,6 +79,33 @@ namespace Negocio
                 data.closeConnection();
             }
         }
+        public List<Producto>ListarPorCategoria(int idCategoria)
+        {
+            List<Producto> list = new List<Producto>();
+            AccesoDatos data = new AccesoDatos();
+            data.setProcedure("ListaPorCategoria");
+            data.setParameter("@idCategoria", idCategoria);
+            data.read();
+            while (data.Reader.Read())
+            {
+                Producto aux = new Producto();
+                aux.id = (int)data.Reader["Id"];
+                aux.codigoProducto = (string)data.Reader["Codigo"];
+                aux.nombre = (string)data.Reader["Nombre"];
+                aux.descripcion = (string)data.Reader["Descripcion"];
+                aux.precio = (decimal)data.Reader["Precio"];
+                aux.marca = new Marca();
+                aux.marca.id = (int)data.Reader["IdMarca"];
+                aux.marca.descripcion = (string)data.Reader["Marca"];
+                aux.categoria = new Categoria();
+                aux.categoria.id = (int)data.Reader["idCategoria"];
+                aux.categoria.descripcion = (string)data.Reader["Categoria"];
+                aux.imagenes = new ImagenDB().getById((int)data.Reader["Id"]);
+                list.Add(aux);
+            }
+            return list;
+        }
+    }
 
     }
-}
+

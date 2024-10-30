@@ -229,3 +229,15 @@ From PRODUCTOS P
 inner join MARCAS M on M.Id = P.idMarca
 inner join CATEGORIAS C on C.Id = p.idCategoria
 end
+
+go
+create procedure ListaPorCategoria
+@idCategoria int
+as
+begin
+Select P.id, P.Codigo,P.Nombre, P.Descripcion, P.Precio, P.idMarca, P.idCategoria,M.Descripcion as Marca,C.Descripcion as Categoria
+From PRODUCTOS P 
+inner join MARCAS M on M.Id = P.idMarca
+inner join CATEGORIAS C on C.Id = p.idCategoria
+where P.idCategoria = @idCategoria
+end

@@ -52,7 +52,8 @@ namespace TP_Cuatrimestral_equipo_20A
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Response.Redirect("Categorias.aspx",false);
+            int cat = ddlCategoria.SelectedIndex;
+            Response.Redirect("Categorias.aspx?id="+cat,false);
         }
     }
 }
