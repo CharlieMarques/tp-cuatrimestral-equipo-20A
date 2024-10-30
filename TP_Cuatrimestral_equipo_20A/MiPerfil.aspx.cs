@@ -53,8 +53,7 @@ namespace TP_Cuatrimestral_equipo_20A
 				if (!Page.IsValid)
 					return;
 				CuentaDB cuentaDB = new CuentaDB();
-				ClienteDB clienteDB = new ClienteDB();
-				//Cuenta cuenta = (Cuenta)Session["cuenta"];
+				ClienteDB clienteDB = new ClienteDB();				
 				Cliente cliente = (Cliente)Session["cliente"];
 				cliente.Nombre = txtNombre.Text;
 				cliente.Apellido = txtApellido.Text;

@@ -208,6 +208,7 @@ begin
 select id,UserName,Email,Contraseña,nivelAcceso from Cuentas where UserName = @nombreUsuario and Contraseña = @contraseña
 end
 
+go
 create procedure NuevoCliente
 @nombre varchar(50),
 @apellido varchar(50),
@@ -217,4 +218,14 @@ create procedure NuevoCliente
 as
 begin 
 insert into Clientes(Nombre,Apellido,nroDocumento,nroTelefono,idCuenta) values (@nombre,@apellido,@dni,@telefono,@idCuenta)
+end
+
+go
+create procedure ListaDeProductos
+as
+begin
+Select P.id, P.Codigo,P.Nombre, P.Descripcion, P.Precio, P.idMarca, P.idCategoria,M.Descripcion as Marca,C.Descripcion as Categoria
+From PRODUCTOS P 
+inner join MARCAS M on M.Id = P.idMarca
+inner join CATEGORIAS C on C.Id = p.idCategoria
 end

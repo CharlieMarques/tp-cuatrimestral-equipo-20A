@@ -14,7 +14,10 @@ namespace Negocio
             List<Producto> list = new List<Producto>();
             AccesoDatos data = new AccesoDatos();
 
-            data.setQuery("select Id, Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria from PRODUCTOS");
+            //data.setQuery("select Id, Codigo, Nombre, Descripcion, Precio, IdMarca, IdCategoria from PRODUCTOS");
+            // /CONSULTA DEL STOREDPROCEDURE("select P.id, P.Codigo,P.Nombre, P.Descripcion, P.Precio, P.idMarca, P.idCategoria,M.Descripcion as Marca,C.Descripcion as Categoria " +
+            //"from PRODUCTOS P inner join MARCAS M on M.Id = P.idMarca inner join CATEGORIAS C on C.Id = p.idCategoria")
+            data.setProcedure("ListaDeProductos");
             data.read();
             while (data.Reader.Read())
             {
@@ -24,10 +27,16 @@ namespace Negocio
                 aux.nombre = (string)data.Reader["Nombre"];
                 aux.descripcion = (string)data.Reader["Descripcion"];
                 aux.precio = (decimal)data.Reader["Precio"];
-                int idMarca = (int)data.Reader["IdMarca"];
+                aux.marca = new Marca();
+                aux.marca.id = (int)data.Reader["IdMarca"];
+                aux.marca.descripcion = (string)data.Reader["Marca"];
+                aux.categoria = new Categoria();
+                aux.categoria.id = (int)data.Reader["idCategoria"];
+                aux.categoria.descripcion = (string)data.Reader["Categoria"];
+                /*int idMarca = (int)data.Reader["IdMarca"];
                 int idCategoria = (int)data.Reader["IdCategoria"];
                 aux.marca = new MarcaDB().getById(idMarca);
-                aux.categoria = new CategoriaDB().getById(idCategoria);
+                aux.categoria = new CategoriaDB().getById(idCategoria);*/
                 aux.imagenes = new ImagenDB().getById((int)data.Reader["Id"]);
                 list.Add(aux);
             }
