@@ -22,7 +22,8 @@
                     <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
                     <span>con tu cuenta o </span>
                     <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
-                    <span>Para recibir las ultimas promociones</span>
+                    <span>Para recibir las ultimas promociones.</span>
+                    <a class="text-black px-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Mi Carrito</a>
                 </div>
             </div>
             <%}
@@ -31,7 +32,7 @@
             <div class="container-Cuenta d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
                 <div class="d-inline text-center">
                     <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
-                    <asp:Label  id="lblNombre" Text="" runat="server" />
+                    <asp:Label ID="lblNombre" Text="" runat="server" />
                     <asp:Button Text="Cerrar Session" CssClass="btn btn-danger" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
                 </div>
             </div>
@@ -70,5 +71,26 @@
             </asp:ContentPlaceHolder>
         </div>
     </form>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+            </div>
+            <div class="dropdown mt-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -30,7 +30,7 @@ namespace TP_Cuatrimestral_equipo_20A
                     //List<Usuario> listUsuario = usuarioDB.toList();
                    // List<Pedido> listPedido = pedidoDB.toList();
 
-                    ddlCategoria.DataSource = listCategoria;
+                    ddlCategoria.DataSource = listCategoria.Append(new Categoria(-1,"Todo"));
                     ddlCategoria.DataTextField = "descripcion";
                     ddlCategoria.DataValueField = "id";
                     ddlCategoria.DataBind();

@@ -188,6 +188,14 @@ values	(1, 'https://imagedelivery.net/4fYuQyy-r8_rpBpcY7lH_A/falabellaCL/1564340
 */
 
 -------------------------------------STORED PROCEDURES----------------------------------------
+drop procedure NuevoUsuario
+drop procedure NuevoCliente
+drop procedure Log_In
+drop procedure ListaDeProductos
+drop procedure ListaPorCategoria
+
+
+
 use Ecommerce_Equipo20A
 go
 CREATE procedure NuevoUsuario

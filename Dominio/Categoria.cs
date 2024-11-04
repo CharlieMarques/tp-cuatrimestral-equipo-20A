@@ -14,5 +14,12 @@ namespace Dominio
         {
             return descripcion;
         }
+
+        public Categoria() { }
+        public Categoria(int id, string descripcion)
+        {
+            this.id = id;
+            this.descripcion = descripcion;
+        }   
     }
 }
