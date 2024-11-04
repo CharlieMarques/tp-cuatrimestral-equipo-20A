@@ -105,6 +105,33 @@ namespace Negocio
             }
             return list;
         }
+
+        public Producto FiltarPorCodigo(string codProducto)
+        {
+            
+            Producto aux = new Producto();
+            AccesoDatos data = new AccesoDatos();
+            data.setQuery("select P.id, P.Codigo,P.Nombre, P.Descripcion, P.Precio, P.idMarca, P.idCategoria,M.Descripcion as Marca,C.Descripcion as Categoria from PRODUCTOS P inner join MARCAS M on M.Id = P.idMarca inner join CATEGORIAS C on C.Id = p.idCategoria where P.Codigo = @CodigoProducto");
+            data.setParameter("@CodigoProducto", codProducto);
+            data.read();
+            while (data.Reader.Read())
+            {
+                aux.id = (int)data.Reader["Id"];
+                aux.codigoProducto = (string)data.Reader["Codigo"];
+                aux.nombre = (string)data.Reader["Nombre"];
+                aux.descripcion = (string)data.Reader["Descripcion"];
+                aux.precio = (decimal)data.Reader["Precio"];
+                aux.marca = new Marca();
+                aux.marca.id = (int)data.Reader["IdMarca"];
+                aux.marca.descripcion = (string)data.Reader["Marca"];
+                aux.categoria = new Categoria();
+                aux.categoria.id = (int)data.Reader["idCategoria"];
+                aux.categoria.descripcion = (string)data.Reader["Categoria"];
+                aux.imagenes = new ImagenDB().getById((int)data.Reader["Id"]);
+                return aux;
+            }
+            return aux;
+        }
     }
 
     }

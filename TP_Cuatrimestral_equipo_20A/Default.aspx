@@ -38,7 +38,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><%# Eval("nombre") %></h5>
                             <p class="card-text"><%# Eval("descripcion") %></p>
-                            <p class="card-text font-weight-bold">$<%# Eval("precio") %></p>
+                            <p class="card-text font-weight-bold">$<%# Eval("precio") %></p>                           
+                            <asp:Button Text="Agregar al carrito" ID="btnAgregarCarrito" CssClass="btn btn-lg" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" Onclick="btnAgregarCarrito_Click" runat="server" />
                         </div>
                     </div>
                 </ItemTemplate>

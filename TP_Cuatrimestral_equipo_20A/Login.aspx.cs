@@ -13,7 +13,7 @@ namespace TP_Cuatrimestral_equipo_20A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (AppToolKit.Session.sessionActiva("cuenta"))
+            if (AppToolKit.Session.sessionActiva(Session["cuenta"]))
             {
                 Response.Redirect("Default.aspx", false);
             }

@@ -55,5 +55,11 @@ namespace TP_Cuatrimestral_equipo_20A
             int cat = ddlCategoria.SelectedIndex;
             Response.Redirect("Categorias.aspx?id="+cat,false);
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Default.aspx", false);
+        }
     }
 }

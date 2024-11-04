@@ -32,10 +32,11 @@
                 <div class="d-inline text-center">
                     <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
                     <asp:Label  id="lblNombre" Text="" runat="server" />
+                    <asp:Button Text="Cerrar Session" CssClass="btn btn-danger" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
                 </div>
             </div>
             <%} %>
-            <nav class="navbar navbar-expand-lg navColor">
+            <nav class="navbar navbar-expand-lg border-bottom py-4 navColor">
 
                 <div class="container">
                     <div class="mx-auto d-flex align-items-center">
