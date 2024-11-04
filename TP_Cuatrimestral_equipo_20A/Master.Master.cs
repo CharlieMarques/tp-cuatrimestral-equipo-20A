@@ -11,6 +11,15 @@ namespace TP_Cuatrimestral_equipo_20A
 {
     public partial class Master : System.Web.UI.MasterPage
     {
+        protected List<Tuple<Producto, int>> carrito;
+
+        private void LoadCarrito()
+        {
+            carrito = Session["carrito"] as List<Tuple<Producto, int>> ?? new List<Tuple<Producto, int>>();
+            repRepetidor.DataSource = carrito;
+            repRepetidor.DataBind();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriaDB categoriaDB = new CategoriaDB();
@@ -28,17 +37,19 @@ namespace TP_Cuatrimestral_equipo_20A
                 {
                     List<Categoria> listCategoria = categoriaDB.toList();
                     //List<Usuario> listUsuario = usuarioDB.toList();
-                   // List<Pedido> listPedido = pedidoDB.toList();
+                    // List<Pedido> listPedido = pedidoDB.toList();
 
                     ddlCategoria.DataSource = listCategoria.Append(new Categoria(-1,"Todo"));
                     ddlCategoria.DataTextField = "descripcion";
                     ddlCategoria.DataValueField = "id";
                     ddlCategoria.DataBind();
                 }
+
+                if (Session.Count > 0) LoadCarrito();
+
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             if (AppToolKit.Session.sessionActiva(Session["cuenta"]))
