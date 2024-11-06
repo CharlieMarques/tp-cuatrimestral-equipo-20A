@@ -51,6 +51,7 @@ namespace TP_Cuatrimestral_equipo_20A
                 carrito.listaCarrito = carrito.agregarProducto(producto, 1);
                 Session.Add("carrito", carrito);
             }
+            Response.Redirect("Default.aspx", false);
         }
     }
 }

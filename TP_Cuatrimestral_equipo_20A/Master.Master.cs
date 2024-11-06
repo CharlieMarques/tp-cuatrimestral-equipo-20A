@@ -21,8 +21,10 @@ namespace TP_Cuatrimestral_equipo_20A
             {
                 carrito = (Carrito)Session["carrito"];
             }
-            repRepetidor.DataSource = carrito.listaCarrito;
-            repRepetidor.DataBind();
+                repRepetidor.DataSource = carrito.listaCarrito;
+                repRepetidor.DataBind();          
+
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
