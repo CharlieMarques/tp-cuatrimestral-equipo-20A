@@ -15,8 +15,13 @@ namespace TP_Cuatrimestral_equipo_20A
 
         private void LoadCarrito()
         {
-            carrito = Session["carrito"] as List<Tuple<Producto, int>> ?? new List<Tuple<Producto, int>>();
-            repRepetidor.DataSource = carrito;
+            //carrito = Session["carrito"] as List<Tuple<Producto, int>> ?? new List<Tuple<Producto, int>>();
+            Carrito carrito = new Carrito();
+            if (Session["carrito"] != null)
+            {
+                carrito = (Carrito)Session["carrito"];
+            }
+            repRepetidor.DataSource = carrito.listaCarrito;
             repRepetidor.DataBind();
         }
 
@@ -44,8 +49,8 @@ namespace TP_Cuatrimestral_equipo_20A
                     ddlCategoria.DataValueField = "id";
                     ddlCategoria.DataBind();
                 }
-
                 if (Session.Count > 0) LoadCarrito();
+
 
             }
             catch (Exception ex)
