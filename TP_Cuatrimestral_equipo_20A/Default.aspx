@@ -6,8 +6,7 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            background-color:aqua;
-            
+            background-color: aqua;
         }
     </style>
 </asp:Content>
@@ -15,10 +14,10 @@
     <div class="container mt-4">
         <h3 class="text-center" style="padding: 50px">Nuestros productos</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <asp:Repeater runat="server" ID="repRepetidor">
+            <asp:Repeater runat="server" ID="repRepetidor" OnItemDataBound="repRepetidor_ItemDataBound">
                 <ItemTemplate>
                     <div class="card" style="margin: 10px; width: 30%">
-                        <div id="carouselImage<%# Eval("id") %>" class="carousel slide" style="background-color:#808080">
+                        <div id="carouselImage<%# Eval("id") %>" class="carousel slide" style="background-color: #808080">
                             <div class="carousel-inner">
                                 <asp:Repeater runat="server" DataSource='<%# Eval("imagenes") %>'>
                                     <ItemTemplate>
@@ -42,6 +41,8 @@
                             <p class="card-text"><%# Eval("descripcion") %></p>
                             <p class="card-text font-weight-bold">$<%# Eval("precio") %></p>
                             <asp:Button Text="Agregar al carrito" ID="btnAgregarCarrito" CssClass="btn btn-lg" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarCarrito_Click" runat="server" />
+                            <asp:Button Text="Agregar otro mas al carrito" ID="btnAgregarOtro" CssClass="btn btn-lg" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarOtro_Click" runat="server" />
+                           
                         </div>
                     </div>
                 </ItemTemplate>

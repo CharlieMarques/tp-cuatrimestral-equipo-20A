@@ -21,7 +21,8 @@ namespace Dominio
             if(elementoCarrito != null)
             {
                 if (elementoCarrito.Cantidad > 0)
-                    elementoCarrito.Cantidad += cantidad;
+                    //elementoCarrito.Cantidad += cantidad;
+                    modificarCantidad(elementoCarrito._Producto.codigoProducto,cantidad);
                 return listaCarrito;
             }
             else
@@ -40,8 +41,6 @@ namespace Dominio
             {
                 elementoCarrito.Cantidad = cantidad;
             }
-        }
-
-        
+        }        
     }
 }
