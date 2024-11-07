@@ -71,7 +71,7 @@ namespace Negocio
             AccesoDatos data = new AccesoDatos();
             try
             {
-                data.setQuery("Insert into Imagenes (IdProducto,ImagenUrl) values (@idProducto, @imagenUrl)");
+                data.setQuery("Insert into Imagenes (IdProducto,UrlImagen) values (@idProducto, @imagenUrl)");
                 data.setParameter("@idProducto",idProducto);
                 data.setParameter("@imagenUrl",urlImagen);
                 data.executeQuery();

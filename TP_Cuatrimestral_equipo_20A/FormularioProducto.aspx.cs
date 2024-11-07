@@ -10,12 +10,15 @@ using Dominio;
 namespace TP_Cuatrimestral_equipo_20A
 {
     public partial class FormularioProducto : System.Web.UI.Page
-    {
+    {   
+        ImagenDB imagenDB = new ImagenDB();
         protected void Page_Load(object sender, EventArgs e)
         {
             ProductoDB productoDB = new ProductoDB();
             MarcaDB marcaDB = new MarcaDB();
             CategoriaDB categoriaDB = new CategoriaDB();
+            btnAgregarImagen.Enabled = false;
+            btnAgregarImagen.Visible = false;
             try
             {
                 txtId.Enabled = false;
@@ -37,9 +40,10 @@ namespace TP_Cuatrimestral_equipo_20A
                 if(id !="" && !IsPostBack)
                 {
                    int idProducto = int.Parse(id);
+                    //List<Imagen> listaImagen = imagenDB.getById(idProducto);
                     ProductoDB produ = new ProductoDB();
                     Producto seleccionado = produ.getById(idProducto);
-                    Session.Add("ProductoSeleccionado", seleccionado);
+                    Session.Add("productoSeleccionado", seleccionado);
                     txtId.Text = idProducto.ToString();
                     txtCodProducto.Text = seleccionado.codigoProducto;
                     txtNombre.Text = seleccionado.nombre;
@@ -47,6 +51,10 @@ namespace TP_Cuatrimestral_equipo_20A
                     txtDescripcion.Text = seleccionado.descripcion;
                     ddlMarca.SelectedValue = seleccionado.marca.id.ToString();
                     ddlCategoria.SelectedValue = seleccionado.categoria.id.ToString();
+                   // txtImagenUrl.Text = listaImagen[0].urlImagen.ToString();
+                    txtImagenUrl_TextChanged(sender, e);
+                    btnAgregarImagen.Enabled = true;
+                    btnAgregarImagen.Visible = true;
                 }
                 
             }
@@ -96,7 +104,7 @@ namespace TP_Cuatrimestral_equipo_20A
                 }
                 else
                 {
-                    productoDB.AgregarProducto(nuevoProducto);
+                   imagenDB.agregarImagen(productoDB.AgregarProducto(nuevoProducto),txtImagenUrl.Text);
                     Response.Redirect("ListaProductos.aspx", false);
                 }
             }
@@ -106,6 +114,36 @@ namespace TP_Cuatrimestral_equipo_20A
                 Session.Add("Error",ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
+        }
+
+        protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
+        {
+            imgProducto.ImageUrl = txtImagenUrl.Text;
+        }
+
+        protected void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
+            try
+            {
+            string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+            if (id !="")
+            {
+                int idPro = int.Parse(id);            
+                imagenDB.agregarImagen(idPro, txtImagenUrl.Text);
+                    Response.Redirect("ListaProductos.aspx", false);
+            }
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error",ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+
         }
     }
 }

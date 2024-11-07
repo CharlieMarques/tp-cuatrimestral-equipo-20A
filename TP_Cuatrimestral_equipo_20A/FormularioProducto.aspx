@@ -40,8 +40,9 @@
             </div>
 
             <div class="mb-3">
-                <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-primary" onclick="btnAceptar_Click" runat="server" />
+                <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-primary" OnClick="btnAceptar_Click" runat="server" />
                 <a href="ListaProductos.aspx">Cancelar</a>
+
 
             </div>
         </div>
@@ -49,6 +50,17 @@
             <div class="mb-3">
                 <label for="txtDescripcion" class="form-label">Descripcion: </label>
                 <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
+                <asp:UpdatePanel ID="UpdatePanel" runat="server">
+                    <ContentTemplate>
+                        <div class="mb-3">
+                            <label for="txtImagenUrl" class="form-label">Url Imagen</label>
+                            <asp:TextBox runat="server" ID="txtImagenUrl" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged" />
+                        </div>
+                        <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png" runat="server" ID="imgProducto" Width="50%" />
+
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:Button Text="Agregar Imagen" ID="btnAgregarImagen" OnClick="btnAgregarImagen_Click" CssClass="btn btn-primary" runat="server" />
             </div>
         </div>
     </div>
