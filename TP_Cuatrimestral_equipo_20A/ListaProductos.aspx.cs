@@ -38,7 +38,7 @@ namespace TP_Cuatrimestral_equipo_20A
         protected void dgvProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             string Id = dgvProducto.SelectedDataKey.Value.ToString();
-            Response.Redirect("FormularioProducto.aspx" + Id, false);
+            Response.Redirect("FormularioProducto.aspx?id=" + Id, false);
         }
 
         protected void dgvProducto_PageIndexChanging(object sender, GridViewPageEventArgs e)

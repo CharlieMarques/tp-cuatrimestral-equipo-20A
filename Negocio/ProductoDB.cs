@@ -160,14 +160,15 @@ namespace Negocio
 
             try
             {
-                data.setQuery("Update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, idMarca = @idMarca, idCategoria = @idCategoria, Precio = @Precio Where Id = @Id");
-                data.setParameter("@dd", producto.id);
+                data.setQuery("Update Productos set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, idMarca = @idMarca, idCategoria = @idCategoria, Precio = @precio Where Id = @Id");
+                data.setParameter("@Id", producto.id);
                 data.setParameter("@codigo", producto.codigoProducto);
                 data.setParameter("@nombre", producto.nombre);
                 data.setParameter("@descripcion", producto.descripcion);
                 data.setParameter("@precio", producto.precio);
                 data.setParameter("@idMarca", producto.marca.id);
                 data.setParameter("@idCategoria", producto.categoria.id);
+                data.executeQuery();
             }
             catch (Exception ex)
             {
