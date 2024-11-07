@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 using Dominio;
 
 namespace Negocio
@@ -61,6 +62,36 @@ namespace Negocio
             finally
             {
                 data.closeConnection();
+            }
+        }
+        public void agregarMarca(string descripcion)
+        {
+            AccesoDatos data = new AccesoDatos();
+            try
+            {
+                data.setQuery("insert into Marcas Descripcion values @descripcion");
+                data.setParameter("@descripcion", descripcion);
+                data.executeQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }                       
+        }
+        public void eliminarMarca(int idMarca)
+        {
+            AccesoDatos data = new AccesoDatos();
+            try
+            {
+                data.setQuery("Delete from Marcas where id = @idMarca");
+                data.setParameter("@idMarca", idMarca);
+                data.executeQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

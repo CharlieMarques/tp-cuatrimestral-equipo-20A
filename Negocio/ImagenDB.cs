@@ -66,5 +66,39 @@ namespace Negocio
                 data.closeConnection();
             }
         }
+        public void agregarImagen(int idProducto, string urlImagen)
+        {
+            AccesoDatos data = new AccesoDatos();
+            try
+            {
+                data.setQuery("Insert into Imagenes (IdProducto,ImagenUrl) values (@idProducto, @imagenUrl)");
+                data.setParameter("@idProducto",idProducto);
+                data.setParameter("@imagenUrl",urlImagen);
+                data.executeQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public void eliminarImagen(int idProducto,int idImagen)
+        {
+            AccesoDatos data = new AccesoDatos();
+            try
+            {
+                data.setQuery("Delete from imagenes where idProducto = @idProducto and Id =@idImagen");
+                data.setParameter("@idProducto",idProducto);
+                data.setParameter("@idImagen",idImagen);
+                data.executeQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
     }
 }
