@@ -12,7 +12,6 @@ namespace TP_Cuatrimestral_equipo_20A
     public partial class Master : System.Web.UI.MasterPage
     {
         protected List<Tuple<Producto, int>> carrito;
-
         private void LoadCarrito()
         {
             //carrito = Session["carrito"] as List<Tuple<Producto, int>> ?? new List<Tuple<Producto, int>>();
@@ -21,12 +20,9 @@ namespace TP_Cuatrimestral_equipo_20A
             {
                 carrito = (Carrito)Session["carrito"];
             }
-                repRepetidor.DataSource = carrito.listaCarrito;
-                repRepetidor.DataBind();          
-
-
+            repRepetidor.DataSource = carrito.listaCarrito;
+            repRepetidor.DataBind();
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriaDB categoriaDB = new CategoriaDB();
@@ -36,6 +32,7 @@ namespace TP_Cuatrimestral_equipo_20A
 
             try
             {
+                UpdateTotals();
                 if (Page is Login || Page is SignUp)
                 {
                     ddlCategoria.Visible = false;
@@ -52,8 +49,6 @@ namespace TP_Cuatrimestral_equipo_20A
                     ddlCategoria.DataBind();
                 }
                 if (Session.Count > 0) LoadCarrito();
-
-
             }
             catch (Exception ex)
             {
@@ -67,17 +62,31 @@ namespace TP_Cuatrimestral_equipo_20A
                 lblNombre.Text = "Bienvenido " + cliente.Nombre + " ";
             }
         }
-
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             int cat = ddlCategoria.SelectedIndex;
             Response.Redirect("Categorias.aspx?id="+cat,false);
         }
-
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Response.Redirect("Default.aspx", false);
+        }
+        protected void UpdateTotals()
+        {
+            if (Session["carrito"] != null)
+            {
+                lblTotalPrice.Text = ((Carrito)Session["carrito"]).listaCarrito.Sum(item => item.Cantidad * item._Producto.precio).ToString(); ;
+                lblTotalPrice.DataBind();
+
+                lblTotalItems.Text = ((Carrito)Session["carrito"]).listaCarrito.Sum(item => item.Cantidad).ToString();
+                lblTotalItems.DataBind();
+            }
+            else
+            {
+                lblTotalItems.Text = "0";
+                lblTotalPrice.Text = "0.00 $";
+            }
         }
     }
 }

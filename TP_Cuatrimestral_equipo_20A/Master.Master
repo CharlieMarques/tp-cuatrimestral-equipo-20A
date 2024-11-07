@@ -83,43 +83,51 @@
                 <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
                     <asp:Repeater runat="server" ID="repRepetidor">
                         <ItemTemplate>
-                                    <div class="card mb-4">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <div id="carouselImage<%# Eval("_Producto.id") %>-cart" class="carousel slide" data-bs-ride="carousel">
-                                                    <div class="carousel-inner">
-                                                        <asp:Repeater runat="server" DataSource='<%# Eval("_Producto.imagenes") %>'>
-                                                            <ItemTemplate>
-                                                                <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
-                                                                    <img src="<%# Eval("urlImagen") %>" class="d-block" style="max-height: 200px;" alt="<%# Eval("id") %>-cart">
-                                                                </div>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </div>
-                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Previous</span>
-                                                    </button>
-                                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Next</span>
-                                                    </button>
-                                                </div>
+                            <div class="card mb-4">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <div id="carouselImage<%# Eval("_Producto.id") %>-cart" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <asp:Repeater runat="server" DataSource='<%# Eval("_Producto.imagenes") %>'>
+                                                    <ItemTemplate>
+                                                        <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
+                                                            <img src="<%# Eval("urlImagen") %>" class="d-block" style="max-height: 200px;" alt="<%# Eval("id") %>-cart">
+                                                        </div>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
                                             </div>
-
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><%# Eval("_Producto.nombre") %></h5>
-                                                    <p class="card-text"><%# Eval("_Producto.descripcion") %></p>
-                                                    <p class="card-text">Cantidad: <%# Eval("Cantidad") %></p>
-                                                    <p class="card-text font-weight-bold">Precio unitario: $<%# Eval("_Producto.precio") %></p>
-                                                    <p class="card-text font-weight-bold">Precio Total: <%#  ((Dominio.ElementoCarrito)Container.DataItem).costo(((Dominio.ElementoCarrito)Container.DataItem)._Producto).ToString("C")%></p>
-                                                </div>
-                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%# Eval("_Producto.nombre") %></h5>
+                                            <p class="card-text"><%# Eval("_Producto.descripcion") %></p>
+                                            <p class="card-text">Cantidad: <%# Eval("Cantidad") %></p>
+                                            <p class="card-text font-weight-bold">Precio unitario: $<%# Eval("_Producto.precio") %></p>
+                                            <p class="card-text font-weight-bold">Precio Total: <%#  ((Dominio.ElementoCarrito)Container.DataItem).costo(((Dominio.ElementoCarrito)Container.DataItem)._Producto).ToString("C")%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </ItemTemplate>
                     </asp:Repeater>
+                </div>
+                <div>
+                    <div>
+                        <p>Total de productos:
+                            <asp:Label ID="lblTotalItems" runat="server" Text="0"></asp:Label></p>
+                        <p>Total a pagar:
+                            <asp:Label ID="lblTotalPrice" runat="server" Text="$0.00"></asp:Label></p>
+                    </div>
 
                 </div>
                 <div class="dropdown mt-3">
@@ -132,8 +140,7 @@
 
     </form>
 </body>
-    <footer>
-        <h6 class="text-center" style="padding: 50px">Equipo 20A Programacion III 2024</h6>
-        
-    </footer>
+<footer>
+    <h6 class="text-center" style="padding: 50px">Equipo 20A Programacion III 2024</h6>
+</footer>
 </html>

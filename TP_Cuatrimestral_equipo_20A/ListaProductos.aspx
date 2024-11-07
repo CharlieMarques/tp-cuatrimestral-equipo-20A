@@ -22,7 +22,6 @@
             <asp:BoundField HeaderText="Descripcion" Datafield="descripcion" />
                 <asp:CommandField HeaderText="Seleccionar" ShowSelectButton="true" SelectText="Modificar" />
         </Columns>
-
     </asp:GridView>
 <a href="FormularioProducto.aspx" class="btn btn-primary">Agregar</a>
 </asp:Content>
