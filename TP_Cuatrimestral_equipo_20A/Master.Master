@@ -25,9 +25,11 @@
                     <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
                     <span>Para recibir las ultimas promociones</span>
                 <%} else { %>
-                    <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
-                    <asp:Label ID="lblNombre" Text="" runat="server" />
-                    <asp:Button Text="Cerrar Session" CssClass="btn btn-danger" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
+                    <%if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1) { %>
+                        <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
+                <%} %>
+                    <asp:Label ID="lblNombre" Text="" runat="server"/>
+                    <asp:Button Text="Cerrar Sesion" CssClass="text-black px-1" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
                 <%} %>
                     <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
                     <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />

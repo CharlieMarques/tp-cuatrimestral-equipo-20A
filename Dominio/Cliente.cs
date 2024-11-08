@@ -15,5 +15,15 @@ namespace Dominio
         public int NroDocumento { get; set; }
         public string Telefono { get; set; }
         public Cuenta cuenta { get; set; }
+        public Cliente() { }
+        public Cliente(int id, string nombre, string apellido, int nroDocumento, string telefono, Cuenta cuenta)
+        {
+            Id = id;
+            Nombre = nombre;
+            Apellido = apellido;
+            NroDocumento = nroDocumento;
+            Telefono = telefono;
+            this.cuenta = cuenta;
+        }   
     }
 }

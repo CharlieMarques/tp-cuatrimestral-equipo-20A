@@ -39,12 +39,25 @@ namespace TP_Cuatrimestral_equipo_20A
                 cuenta.Contraseña = txtPassword.Text;
                 if (cuentaDB.Login(cuenta))
                 {
-                   Cliente cliente = clienteDB.cargarDatosCliente(cuenta.Id);
+                    Cliente cliente = clienteDB.cargarDatosCliente(cuenta.Id);
                     Session.Add("cuenta", cuenta);
-                    Session.Add("cliente", cliente);
                     Response.Redirect("Default.aspx", false);
+                    if (cliente != null)
+                    {
+                        Session.Add("cliente", cliente);
+                    }
+                    else
+                    {
+                        cliente = new Cliente(
+                            ((Cuenta)Session["cuenta"]).Id,
+                            ((Cuenta)Session["cuenta"]).NombreUsuario,
+                            "",
+                            0,
+                            "",
+                            ((Cuenta)Session["cuenta"]));
+                        Session.Add("cliente", cliente);
+                    }
                 }
-
             }
             catch (Exception ex)
             {

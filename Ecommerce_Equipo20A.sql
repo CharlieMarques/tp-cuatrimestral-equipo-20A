@@ -11,13 +11,11 @@ create table MARCAS(
 );
 go
 
-
 create table CATEGORIAS(
 	Id int identity(1,1) not null primary key,
 	Descripcion varchar (50) not null
 );
 go
-
 
 create table PRODUCTOS(
 	Id int identity(1,1) not null primary key,
@@ -30,6 +28,7 @@ create table PRODUCTOS(
 	FOREIGN KEY (idMarca) REFERENCES MARCAS(Id),
 	FOREIGN KEY (idCategoria) REFERENCES CATEGORIAS(Id)
 );
+go
 
 insert into MARCAS (Descripcion) 
 values	('Apple'),
@@ -139,8 +138,8 @@ create table DETALLES_PEDIDO (
     foreign key (IdPedido) references PEDIDOS(Id),
     foreign key (IdProducto) references PRODUCTOS(Id)
 );
-
 go
+
 insert into PEDIDOS (IdCuenta, Fecha, Total, Estado)
 values
     (1, getdate(), 1849.98, 'Procesando'),
@@ -189,14 +188,13 @@ values	(1, 'https://imagedelivery.net/4fYuQyy-r8_rpBpcY7lH_A/falabellaCL/1564340
 		(7, 'https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjQ3Njh8aW1hZ2UvanBlZ3xoMzMvaGQxLzEwNjc0NTg2MzUzNjk0LmpwZ3w4MGUyZGY0Y2FiZGMzYmMzN2IxZDAxNTVkOTJkN2E1OTkwNjg1NmVlOTU3MzQ0ZDc5MWUxZTg3NWM4ZTU3MmI4/lenovo-laptop-thinkpad-x1-carbon-gen8-subseries-gallery-2.jpg'),
 		(8, 'https://imagedelivery.net/4fYuQyy-r8_rpBpcY7lH_A/falabellaCL/135776764_01/w=1500,h=1500,fit=pad');
 
-
+/*
 drop procedure NuevoUsuario
 drop procedure NuevoCliente
 drop procedure Log_In
 drop procedure ListaDeProductos
 drop procedure ListaPorCategoria
-
-
+*/
 
 use Ecommerce_Equipo20A
 go
@@ -251,3 +249,10 @@ inner join MARCAS M on M.Id = P.idMarca
 inner join CATEGORIAS C on C.Id = p.idCategoria
 where P.idCategoria = @idCategoria
 end
+
+/*
+EXEC Log_In @nombreUsuario="Administrador", @contraseña="admin";
+
+select CL.id, CL.Nombre, CL.Apellido, CL.nroDocumento, CL.nroTelefono, CL.idCuenta from clientes CL 
+inner join Cuentas CU on CU.id = CL.idCuenta where CU.id = 1
+*/
