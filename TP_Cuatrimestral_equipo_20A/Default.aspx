@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TP_Cuatrimestral_equipo_20A.Default" %>
+<%@ MasterType VirtualPath="~/Master.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -12,7 +13,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container mt-4">
-        <h3 class="text-center" style="padding: 50px">Nuestros productos</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <asp:Repeater runat="server" ID="repRepetidor" OnItemDataBound="repRepetidor_ItemDataBound">
                 <ItemTemplate>
@@ -39,10 +39,17 @@
                         <div class="card-body">
                             <h5 class="card-title"><%# Eval("nombre") %></h5>
                             <p class="card-text"><%# Eval("descripcion") %></p>
-                            <p class="card-text font-weight-bold">$<%# Eval("precio") %></p>
-                            <asp:Button Text="Agregar al carrito" ID="btnAgregarCarrito" CssClass="btn btn-lg" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarCarrito_Click" runat="server" />
-                            <asp:Button Text="Agregar otro mas al carrito" ID="btnAgregarOtro" CssClass="btn btn-lg" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarOtro_Click" runat="server" />
-                           
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col align-self-center">
+                                        <h5>$<%# Eval("precio") %></h5>
+                                    </div>
+                                    <div class="col align-self-start">
+                                        <asp:Button Text="Agregar al carrito" ID="btnAgregarCarrito" CssClass="btn btn-outline-success" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarCarrito_Click" runat="server" />
+                                        <asp:Button Text="Agregar otro" ID="btnAgregarOtro" CssClass="btn btn-outline-success" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarOtro_Click" runat="server" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </ItemTemplate>

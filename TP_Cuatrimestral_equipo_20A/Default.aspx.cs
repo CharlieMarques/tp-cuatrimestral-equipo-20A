@@ -89,7 +89,7 @@ namespace TP_Cuatrimestral_equipo_20A
 
                 Button btnAgregarCarrito = (Button)e.Item.FindControl("btnAgregarCarrito");
                 Button btnAgregarOtro = (Button)e.Item.FindControl("btnAgregarOtro");
-                if (!AppToolKit.Session.productoEnLista(carrito,codigoProducto))
+                if (!AppToolKit.Session.productoEnLista(carrito, codigoProducto))
                 {
                     btnAgregarCarrito.Visible = true;
                     btnAgregarOtro.Visible = false;

@@ -5,7 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="container mt-4">
-        <h3 class="text-center" style="padding: 50px">Nuestros productos</h3>
         <table class="table table-bordered">
             <thead>
                 <tr>

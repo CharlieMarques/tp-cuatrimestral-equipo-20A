@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>TP Cuatrimestral Programación III</title>
+    <title>Nuestros Productos</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -16,64 +16,44 @@
 <body>
     <form id="form1" runat="server">
         <header>
-            <%if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
-                { %>
             <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
                 <div class="d-inline text-center">
+                    <a class="navbar-brand" href="Default.aspx"> <img src="Images/logo.png" alt="Logo" width="25" height="25" /> </a>
+                <%if (!(AppToolKit.Session.sessionActiva(Session["cuenta"]))) { %>
                     <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
                     <span>con tu cuenta o </span>
                     <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
-                    <span>Para recibir las ultimas promociones.</span>
-                    <a class="text-black px-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Mi Carrito</a>
-
-                </div>
-            </div>
-            <%}
-                else
-                { %>
-            <div class="container-Cuenta d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
-                <div class="d-inline text-center">
+                    <span>Para recibir las ultimas promociones</span>
+                <%} else { %>
                     <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
                     <asp:Label ID="lblNombre" Text="" runat="server" />
                     <asp:Button Text="Cerrar Session" CssClass="btn btn-danger" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
+                <%} %>
+                    <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
+                    <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />
+                    <asp:Button runat="server" ID="btnBuscar" CssClass="btnBusca" Text="Buscar" />
                     <a class="text-black px-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Mi Carrito</a>
                 </div>
             </div>
-            <%} %>
-            <nav class="navbar navbar-expand-lg border-bottom py-4 navColor">
-
-                <div class="container">
-                    <div class="mx-auto d-flex align-items-center">
-                        <a class="navbar-brand" href="Default.aspx">
-                            <img src="Images/logo.png" alt="Logo" width="70" height="70" />
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <div class="navbar-nav">
-                                <div class="divBuscador">
-                                    <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
-                                    <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />
-                                    <asp:Button runat="server" ID="btnBuscar" CssClass="btnBusca" Text="Buscar" />
-                                </div>
-                            </div>
+            <div class="container mt-4 text-center">
+                <div class="row">
+                    <div class="col align-self-center">
+                        <h2><asp:Label runat="server" ID="lblPageTitle" Text="Nuestros Productos"></asp:Label></h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 align-self-start">
+                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
+                                <asp:ListItem Text="Categorías" Value="" />
+                            </asp:DropDownList>
                         </div>
                     </div>
                 </div>
-            </nav>
-            <div class="col-1">
-                <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
-                    <asp:ListItem Text="Categorías" Value="" />
-                </asp:DropDownList>
             </div>
         </header>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Carrito</h5>
@@ -106,14 +86,12 @@
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title"><%# Eval("_Producto.nombre") %></h5>
-                                            <p class="card-text"><%# Eval("_Producto.descripcion") %></p>
                                             <p class="card-text">Cantidad: <%# Eval("Cantidad") %></p>
-                                            <p class="card-text font-weight-bold">Precio unitario: $<%# Eval("_Producto.precio") %></p>
-                                            <p class="card-text font-weight-bold">Precio Total: <%#  ((Dominio.ElementoCarrito)Container.DataItem).costo(((Dominio.ElementoCarrito)Container.DataItem)._Producto).ToString("C")%></p>
+                                            <p class="card-text">Precio unitario: $<%# Eval("_Producto.precio") %></p>
+                                            <p class="card-text">Precio Total: <%#  ((Dominio.ElementoCarrito)Container.DataItem).costo(((Dominio.ElementoCarrito)Container.DataItem)._Producto).ToString("C")%></p>
                                         </div>
                                     </div>
                                 </div>
@@ -121,23 +99,21 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
-                <div>
+                <div class="container text-end">
+                    <div class="row">
+                        <div>
+                            <p>Total de productos: <asp:Label ID="lblTotalItems" runat="server" Text="0"></asp:Label></p>
+                        </div>
                     <div>
-                        <p>Total de productos:
-                            <asp:Label ID="lblTotalItems" runat="server" Text="0"></asp:Label></p>
-                        <p>Total a pagar:
-                            <asp:Label ID="lblTotalPrice" runat="server" Text="$0.00"></asp:Label></p>
+                        <p>Total a pagar: $<asp:Label ID="lblTotalPrice" runat="server" Text="0.00"></asp:Label></p>
                     </div>
-
-                </div>
-                <div class="dropdown mt-3">
-                    <button class="btn btn-primary" type="button">
-                        Comprar
-                    </button>
+                    <div>
+                        <button class="btn btn-success" type="button">Comprar</button>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </form>
 </body>
 <footer>
