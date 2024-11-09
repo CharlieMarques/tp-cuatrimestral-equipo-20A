@@ -51,16 +51,12 @@
                             <asp:Label runat="server" ID="lblPageTitle" Text="Nuestros Productos"></asp:Label></h2>
                     </div>
                     <div class="row align-items-center">
-                        <div class="col-2 d-flex">
-                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="btn btn-outline-dark dropdown-toggle" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
-                                <asp:ListItem Text="Categorías" Value="" />
+                        <div class="col-6 d-flex">
+                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="btn btn-outline-dark dropdown-toggle m-1" style="width: 125px;" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
+                            <asp:ListItem Text="Categorías" Value="" />
                             </asp:DropDownList>
-                        </div>
-                        <div class="col-6">
-                            <asp:TextBox runat="server" ID="txtFiltro"></asp:TextBox>
-                        </div>
-                        <div>
-                            <asp:Button runat="server" ID="btnBuscar" Text="Buscar" OnClick="btnBuscar_Click"/>
+                            <asp:TextBox runat="server" CssClass="form-control m-1" style="width:225px" ID="txtFiltro"></asp:TextBox>
+                            <asp:Button runat="server" ID="btnBuscar" CssClass="btn btn-outline-dark m-1" Text="Buscar" OnClick="btnBuscar_Click"/>
                         </div>
                     </div>
                 </div>

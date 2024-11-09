@@ -41,6 +41,8 @@ namespace TP_Cuatrimestral_equipo_20A
                 if (Page is Login || Page is SignUp)
                 {
                     ddlCategoria.Visible = false;
+                    txtFiltro.Visible = false;
+                    btnBuscar.Visible = false;
                 }
                 if (!IsPostBack)
                 {
