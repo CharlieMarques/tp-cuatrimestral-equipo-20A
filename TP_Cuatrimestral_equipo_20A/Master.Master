@@ -19,18 +19,24 @@
             <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
                 <div class="d-inline text-center">
                     <a class="navbar-brand" href="Default.aspx"> <img src="Images/logo.png" alt="Logo" width="25" height="25" /> </a>
-                <%if (!(AppToolKit.Session.sessionActiva(Session["cuenta"]))) { %>
-                    <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
-                    <span>con tu cuenta o </span>
-                    <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
-                    <span>Para recibir las ultimas promociones</span>
-                <%} else { %>
-                    <%if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1) { %>
-                        <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
-                <%} %>
-                    <asp:Label ID="lblNombre" Text="" runat="server"/>
-                    <asp:Button Text="Cerrar Sesion" CssClass="text-black px-1" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
-                <%} %>
+                    <% if (!(AppToolKit.Session.sessionActiva(Session["cuenta"]))) { %>
+                        <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
+                        <span>con tu cuenta o </span>
+                        <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
+                        <span>Para recibir las ultimas promociones</span>
+                    <% } %>
+                    <% else { %>
+                        <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1) { %>
+                                <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
+                        <%} %>
+                        <% else { %>
+                            <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 3) { %>
+                                <a class="text-black px-1" href="ListaProductos.aspx">Panel admin</a>
+                            <%} %>
+                        <%} %>
+                        <asp:Label ID="lblNombre" Text="" runat="server"/>
+                        <asp:Button Text="Cerrar Sesion" CssClass="text-black px-1" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
+                    <%} %>
                     <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
                     <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />
                     <asp:Button runat="server" ID="btnBuscar" CssClass="btnBusca" Text="Buscar" />

@@ -17,7 +17,6 @@ namespace TP_Cuatrimestral_equipo_20A
             {
                 Response.Redirect("Default.aspx", false);
             }
-            
             Master.PageTitle = "Iniciar Sesión";    
         }
 

@@ -13,9 +13,8 @@ namespace TP_Cuatrimestral_equipo_20A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Master.PageTitle = "Registro";
         }
-
         protected void btnResgistrarse_Click(object sender, EventArgs e)
         {
             try
@@ -34,7 +33,6 @@ namespace TP_Cuatrimestral_equipo_20A
                 }
                 else
                 {
-
                     cuenta.NombreUsuario = txtUser.Text;
                     cuenta.Email = txtEmail.Text;
                     cuenta.Contraseña = txtPassword.Text;
@@ -61,7 +59,6 @@ namespace TP_Cuatrimestral_equipo_20A
 
                                 Response.Redirect("Default.aspx", false);                         
                             }
-
                         }
                         else
                         {
