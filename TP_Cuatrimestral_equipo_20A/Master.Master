@@ -17,42 +17,50 @@
     <form id="form1" runat="server">
         <header>
             <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
-                <div class="d-inline text-center">
-                    <a class="navbar-brand" href="Default.aspx"> <img src="Images/logo.png" alt="Logo" width="25" height="25" /> </a>
-                    <% if (!(AppToolKit.Session.sessionActiva(Session["cuenta"]))) { %>
-                        <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
-                        <span>con tu cuenta o </span>
-                        <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
-                        <span>Para recibir las ultimas promociones</span>
+                <div class="d-flex text-center align-items-center" style="padding: 4px">
+                    <a class="navbar-brand" style="padding: 4px" href="Default.aspx">
+                        <img src="Images/logo.png" alt="Logo" width="25" height="25" />
+                    </a>
+                    <% if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+                        { %>
+                    <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
+                    <span>con tu cuenta o </span>
+                    <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
+                    <span>Para recibir las ultimas promociones</span>
                     <% } %>
-                    <% else { %>
-                        <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1) { %>
-                                <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
-                        <%} %>
-                        <% else { %>
-                            <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 3) { %>
-                                <a class="text-black px-1" href="ListaProductos.aspx">Panel admin</a>
-                            <%} %>
-                        <%} %>
-                        <asp:Label ID="lblNombre" Text="" runat="server"/>
-                        <asp:Button Text="Cerrar Sesion" CssClass="text-black px-1" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
+                    <% else
+                        { %>
+                    <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1)
+                        { %>
+                    <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
                     <%} %>
-                    <asp:Label CssClass="LblBuscador" for="Buscador" runat="server" />
-                    <asp:TextBox runat="server" CssClass="Buscador" Placeholder="Buscar" />
-                    <asp:Button runat="server" ID="btnBuscar" CssClass="btnBusca" Text="Buscar" />
+                    <asp:Label ID="lblNombre" Text="" Style="padding: 4px" runat="server" />
+                    <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 3)
+                        { %>
+                    <a class="text-black px-1" href="ListaProductos.aspx">Panel admin</a>
+                    <%} %>
+                    <asp:Button Text="Cerrar Sesion" CssClass="btn btn-link" Style="padding: 4px; color: black; border: none;" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
+                    <%} %>
                     <a class="text-black px-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Mi Carrito</a>
                 </div>
             </div>
             <div class="container mt-4 text-center">
                 <div class="row">
                     <div class="col align-self-center">
-                        <h2><asp:Label runat="server" ID="lblPageTitle" Text="Nuestros Productos"></asp:Label></h2>
+                        <h2>
+                            <asp:Label runat="server" ID="lblPageTitle" Text="Nuestros Productos"></asp:Label></h2>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2 align-self-start">
-                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
+                    <div class="row align-items-center">
+                        <div class="col-2 d-flex">
+                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="btn btn-outline-dark dropdown-toggle" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
                                 <asp:ListItem Text="Categorías" Value="" />
                             </asp:DropDownList>
+                        </div>
+                        <div class="col-6">
+                            <asp:TextBox runat="server" ID="txtFiltro"></asp:TextBox>
+                        </div>
+                        <div>
+                            <asp:Button runat="server" ID="btnBuscar" Text="Buscar" OnClick="btnBuscar_Click"/>
                         </div>
                     </div>
                 </div>
@@ -110,14 +118,17 @@
                 <div class="container text-end">
                     <div class="row">
                         <div>
-                            <p>Total de productos: <asp:Label ID="lblTotalItems" runat="server" Text="0"></asp:Label></p>
+                            <p>
+                                Total de productos:
+                                <asp:Label ID="lblTotalItems" runat="server" Text="0"></asp:Label>
+                            </p>
                         </div>
-                    <div>
-                        <p>Total a pagar: $<asp:Label ID="lblTotalPrice" runat="server" Text="0.00"></asp:Label></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-success" type="button">Comprar</button>
-                    </div>
+                        <div>
+                            <p>Total a pagar: $<asp:Label ID="lblTotalPrice" runat="server" Text="0.00"></asp:Label></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-success" type="button">Comprar</button>
+                        </div>
                     </div>
                 </div>
             </div>

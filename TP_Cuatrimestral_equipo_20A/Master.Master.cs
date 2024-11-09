@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -60,7 +61,7 @@ namespace TP_Cuatrimestral_equipo_20A
             {
                 Cuenta cuenta = (Cuenta)Session["cuenta"];
                 Cliente cliente = (Cliente)Session["cliente"];
-                lblNombre.Text = "Bienvenido " + cliente.Nombre + " ";
+                lblNombre.Text = "Bienvenido, " + cliente.Nombre + " ";
             }
         }
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,6 +89,11 @@ namespace TP_Cuatrimestral_equipo_20A
                 lblTotalItems.Text = "0";
                 lblTotalPrice.Text = "0.00 $";
             }
+        }
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            //List<Producto> lista = (List<Producto>)Session["listadoProducto"];
+            //List<Producto> listaFiltrada = lista.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
         }
     }
 }

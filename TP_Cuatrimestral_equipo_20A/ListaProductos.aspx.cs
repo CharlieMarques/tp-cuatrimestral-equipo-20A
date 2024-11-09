@@ -27,6 +27,7 @@ namespace TP_Cuatrimestral_equipo_20A
                     dgvProducto.DataSource = Session["listadoProducto"];
                     dgvProducto.DataBind();
                 }
+                Master.PageTitle = "Lista Productos";
             }
             else
             {
@@ -44,14 +45,6 @@ namespace TP_Cuatrimestral_equipo_20A
         protected void dgvProducto_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvProducto.PageIndex = e.NewPageIndex;
-            dgvProducto.DataBind();
-        }
-
-        protected void txtFiltro_TextChanged(object sender, EventArgs e)
-        {
-            List<Producto> lista = (List<Producto>)Session["listadoProducto"];
-            List<Producto> listaFiltrada = lista.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
-            dgvProducto.DataSource= listaFiltrada;
             dgvProducto.DataBind();
         }
     }
