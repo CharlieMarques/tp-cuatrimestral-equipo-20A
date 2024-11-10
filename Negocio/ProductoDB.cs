@@ -83,27 +83,36 @@ namespace Negocio
         {
             List<Producto> list = new List<Producto>();
             AccesoDatos data = new AccesoDatos();
-            data.setProcedure("ListaPorCategoria");
-            data.setParameter("@idCategoria", idCategoria);
-            data.read();
-            while (data.Reader.Read())
+            try
             {
-                Producto aux = new Producto();
-                aux.id = (int)data.Reader["Id"];
-                aux.codigoProducto = (string)data.Reader["Codigo"];
-                aux.nombre = (string)data.Reader["Nombre"];
-                aux.descripcion = (string)data.Reader["Descripcion"];
-                aux.precio = (decimal)data.Reader["Precio"];
-                aux.marca = new Marca();
-                aux.marca.id = (int)data.Reader["IdMarca"];
-                aux.marca.descripcion = (string)data.Reader["Marca"];
-                aux.categoria = new Categoria();
-                aux.categoria.id = (int)data.Reader["idCategoria"];
-                aux.categoria.descripcion = (string)data.Reader["Categoria"];
-                aux.imagenes = new ImagenDB().getById((int)data.Reader["Id"]);
-                list.Add(aux);
+                data.setProcedure("ListaPorCategoria");
+                data.setParameter("@idCategoria", idCategoria);
+                data.read();
+                while (data.Reader.Read())
+                {
+                    Producto aux = new Producto();
+                    aux.id = (int)data.Reader["Id"];
+                    aux.codigoProducto = (string)data.Reader["Codigo"];
+                    aux.nombre = (string)data.Reader["Nombre"];
+                    aux.descripcion = (string)data.Reader["Descripcion"];
+                    aux.precio = (decimal)data.Reader["Precio"];
+                    aux.marca = new Marca();
+                    aux.marca.id = (int)data.Reader["IdMarca"];
+                    aux.marca.descripcion = (string)data.Reader["Marca"];
+                    aux.categoria = new Categoria();
+                    aux.categoria.id = (int)data.Reader["idCategoria"];
+                    aux.categoria.descripcion = (string)data.Reader["Categoria"];
+                    aux.imagenes = new ImagenDB().getById((int)data.Reader["Id"]);
+                    list.Add(aux);
+                }
+                return list;
             }
-            return list;
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
 
         public Producto FiltarPorCodigo(string codProducto)
@@ -111,6 +120,9 @@ namespace Negocio
 
             Producto aux = new Producto();
             AccesoDatos data = new AccesoDatos();
+            try
+            {
+
             data.setQuery("select P.id, P.Codigo,P.Nombre, P.Descripcion, P.Precio, P.idMarca, P.idCategoria,M.Descripcion as Marca,C.Descripcion as Categoria from PRODUCTOS P inner join MARCAS M on M.Id = P.idMarca inner join CATEGORIAS C on C.Id = p.idCategoria where P.Codigo = @CodigoProducto");
             data.setParameter("@CodigoProducto", codProducto);
             data.read();
@@ -131,6 +143,12 @@ namespace Negocio
                 return aux;
             }
             return aux;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public int AgregarProducto(Producto nuevo)
@@ -169,6 +187,41 @@ namespace Negocio
                 data.setParameter("@idMarca", producto.marca.id);
                 data.setParameter("@idCategoria", producto.categoria.id);
                 data.executeQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public List<Producto> getProductos(string filtro) 
+        {
+            List<Producto> list = new List<Producto>();
+            AccesoDatos data = new AccesoDatos();
+            try
+            {
+                data.setQuery("select P.id, P.Codigo,P.Nombre, P.Descripcion, P.Precio, P.idMarca, P.idCategoria,M.Descripcion as Marca,C.Descripcion as Categoria from PRODUCTOS P inner join MARCAS M on M.Id = P.idMarca inner join CATEGORIAS C on C.Id = p.idCategoria where P.Nombre like @filtro or C.Descripcion like @filtro or M.Descripcion like @filtro or P.Descripcion like @filtro");
+                string filtroC = "%" + filtro + "%";
+                data.setParameter("@filtro", filtroC);
+                data.read();
+                while (data.Reader.Read())
+                {
+                    Producto aux = new Producto();
+                    aux.id = (int)data.Reader["Id"];
+                    aux.codigoProducto = (string)data.Reader["Codigo"];
+                    aux.nombre = (string)data.Reader["Nombre"];
+                    aux.descripcion = (string)data.Reader["Descripcion"];
+                    aux.precio = (decimal)data.Reader["Precio"];
+                    aux.marca = new Marca();
+                    aux.marca.id = (int)data.Reader["IdMarca"];
+                    aux.marca.descripcion = (string)data.Reader["Marca"];
+                    aux.categoria = new Categoria();
+                    aux.categoria.id = (int)data.Reader["idCategoria"];
+                    aux.categoria.descripcion = (string)data.Reader["Categoria"];
+                    aux.imagenes = new ImagenDB().getById((int)data.Reader["Id"]);
+                    list.Add(aux);
+                }
+                return list;
             }
             catch (Exception ex)
             {

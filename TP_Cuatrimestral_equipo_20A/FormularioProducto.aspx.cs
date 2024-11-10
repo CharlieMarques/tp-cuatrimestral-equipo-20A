@@ -10,62 +10,78 @@ using Dominio;
 namespace TP_Cuatrimestral_equipo_20A
 {
     public partial class FormularioProducto : System.Web.UI.Page
-    {   
+    {
         ImagenDB imagenDB = new ImagenDB();
         protected void Page_Load(object sender, EventArgs e)
         {
-            ProductoDB productoDB = new ProductoDB();
-            MarcaDB marcaDB = new MarcaDB();
-            CategoriaDB categoriaDB = new CategoriaDB();
-            btnAgregarImagen.Enabled = false;
-            btnAgregarImagen.Visible = false;
-            
-            try
-            {
-                txtId.Enabled = false;
-                if(!IsPostBack)
-                {
-                   // List<Producto> listaProducto = productoDB.toList();
-                    List<Marca>listaMarcas = marcaDB.toList();
-                    List<Categoria>listaCategorias = categoriaDB.toList();
-                    ddlMarca.DataSource = listaMarcas;
-                    ddlMarca.DataTextField = "descripcion";
-                    ddlMarca.DataValueField = "id";
-                    ddlMarca.DataBind();
-                    ddlCategoria.DataSource = listaCategorias;
-                    ddlCategoria.DataTextField = "descripcion";
-                    ddlCategoria.DataValueField= "id";
-                    ddlCategoria.DataBind();
-                    Master.PageTitle = "Agregar Nuevo Producto";
-                }
-                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                if(id !="" && !IsPostBack)
-                {
-                   int idProducto = int.Parse(id);
-                    //List<Imagen> listaImagen = imagenDB.getById(idProducto);
-                    ProductoDB produ = new ProductoDB();
-                    Producto seleccionado = produ.getById(idProducto);
-                    Session.Add("productoSeleccionado", seleccionado);
-                    txtId.Text = idProducto.ToString();
-                    txtCodProducto.Text = seleccionado.codigoProducto;
-                    txtNombre.Text = seleccionado.nombre;
-                    txtPrecio.Text = seleccionado.precio.ToString();
-                    txtDescripcion.Text = seleccionado.descripcion;
-                    ddlMarca.SelectedValue = seleccionado.marca.id.ToString();
-                    ddlCategoria.SelectedValue = seleccionado.categoria.id.ToString();
-                   // txtImagenUrl.Text = listaImagen[0].urlImagen.ToString();
-                    txtImagenUrl_TextChanged(sender, e);
-                    btnAgregarImagen.Enabled = true;
-                    btnAgregarImagen.Visible = true;
-                    Master.PageTitle = "Modificar Producto";
-                }
-                
-            }
-            catch (Exception ex)
-            {
 
-                Session.Add("Error", ex.ToString());
-                Response.Redirect("Error.aspx",false);
+            if (AppToolKit.Session.sessionActiva(Session["cuenta"]))
+            {
+                Cuenta cuenta = (Cuenta)Session["cuenta"];
+                if (cuenta.NivelAcceso <= 1)
+                {
+                    Response.Redirect("Default.aspx", false);
+                }
+                else
+                {
+                    ProductoDB productoDB = new ProductoDB();
+                    MarcaDB marcaDB = new MarcaDB();
+                    CategoriaDB categoriaDB = new CategoriaDB();
+                    btnAgregarImagen.Enabled = false;
+                    btnAgregarImagen.Visible = false;
+
+                    try
+                    {
+                        txtId.Enabled = false;
+                        if (!IsPostBack)
+                        {
+                            // List<Producto> listaProducto = productoDB.toList();
+                            List<Marca> listaMarcas = marcaDB.toList();
+                            List<Categoria> listaCategorias = categoriaDB.toList();
+                            ddlMarca.DataSource = listaMarcas;
+                            ddlMarca.DataTextField = "descripcion";
+                            ddlMarca.DataValueField = "id";
+                            ddlMarca.DataBind();
+                            ddlCategoria.DataSource = listaCategorias;
+                            ddlCategoria.DataTextField = "descripcion";
+                            ddlCategoria.DataValueField = "id";
+                            ddlCategoria.DataBind();
+                            Master.PageTitle = "Agregar Nuevo Producto";
+                        }
+                        string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                        if (id != "" && !IsPostBack)
+                        {
+                            int idProducto = int.Parse(id);
+                            //List<Imagen> listaImagen = imagenDB.getById(idProducto);
+                            ProductoDB produ = new ProductoDB();
+                            Producto seleccionado = produ.getById(idProducto);
+                            Session.Add("productoSeleccionado", seleccionado);
+                            txtId.Text = idProducto.ToString();
+                            txtCodProducto.Text = seleccionado.codigoProducto;
+                            txtNombre.Text = seleccionado.nombre;
+                            txtPrecio.Text = seleccionado.precio.ToString();
+                            txtDescripcion.Text = seleccionado.descripcion;
+                            ddlMarca.SelectedValue = seleccionado.marca.id.ToString();
+                            ddlCategoria.SelectedValue = seleccionado.categoria.id.ToString();
+                            // txtImagenUrl.Text = listaImagen[0].urlImagen.ToString();
+                            txtImagenUrl_TextChanged(sender, e);
+                            btnAgregarImagen.Enabled = true;
+                            btnAgregarImagen.Visible = true;
+                            Master.PageTitle = "Modificar Producto";
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Session.Add("Error", ex.ToString());
+                        Response.Redirect("Error.aspx", false);
+                    }
+                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx", false);
             }
         }
 
@@ -76,7 +92,7 @@ namespace TP_Cuatrimestral_equipo_20A
                 return;
             try
             {
-                if(string.IsNullOrEmpty(txtCodProducto.Text)|| string.IsNullOrEmpty(txtNombre.Text)|| string.IsNullOrEmpty(txtPrecio.Text))
+                if (string.IsNullOrEmpty(txtCodProducto.Text) || string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtPrecio.Text))
                 {
                     Session.Add("Error", "Faltan campos por completar");
                     Response.Redirect("Error.aspx", false);
@@ -86,13 +102,13 @@ namespace TP_Cuatrimestral_equipo_20A
                 nuevoProducto.codigoProducto = txtCodProducto.Text;
                 nuevoProducto.precio = decimal.Parse(txtPrecio.Text);
                 nuevoProducto.nombre = txtNombre.Text;
-                if(string.IsNullOrEmpty(txtDescripcion.Text))
+                if (string.IsNullOrEmpty(txtDescripcion.Text))
                 {
                     nuevoProducto.descripcion = "Sin descripcion";
                 }
                 else
                 {
-                nuevoProducto.descripcion = txtDescripcion.Text;
+                    nuevoProducto.descripcion = txtDescripcion.Text;
                 }
                 nuevoProducto.categoria = new Categoria();
                 nuevoProducto.categoria.id = int.Parse(ddlCategoria.SelectedValue);
@@ -107,14 +123,14 @@ namespace TP_Cuatrimestral_equipo_20A
                 }
                 else
                 {
-                   imagenDB.agregarImagen(productoDB.AgregarProducto(nuevoProducto),txtImagenUrl.Text);
+                    imagenDB.agregarImagen(productoDB.AgregarProducto(nuevoProducto), txtImagenUrl.Text);
                     Response.Redirect("ListaProductos.aspx", false);
                 }
             }
             catch (Exception ex)
             {
 
-                Session.Add("Error",ex.ToString());
+                Session.Add("Error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
         }
@@ -131,19 +147,19 @@ namespace TP_Cuatrimestral_equipo_20A
                 return;
             try
             {
-            string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-            if (id !="")
-            {
-                int idPro = int.Parse(id);            
-                imagenDB.agregarImagen(idPro, txtImagenUrl.Text);
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if (id != "")
+                {
+                    int idPro = int.Parse(id);
+                    imagenDB.agregarImagen(idPro, txtImagenUrl.Text);
                     Response.Redirect("ListaProductos.aspx", false);
-            }
+                }
 
             }
             catch (Exception ex)
             {
 
-                Session.Add("Error",ex.ToString());
+                Session.Add("Error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
 

@@ -30,7 +30,7 @@ namespace TP_Cuatrimestral_equipo_20A
 
                     if (categoria == null) Response.Redirect("Default.aspx", false);
 
-                    else 
+                    else
                     {
                         Master.PageTitle = categoria.descripcion;
                     }
@@ -41,7 +41,34 @@ namespace TP_Cuatrimestral_equipo_20A
                     Response.Redirect("Error.aspx", false);
                 }
             }
-            else Response.Redirect("Default.aspx", false);
+            else if (!IsPostBack && Request.QueryString["Bus"] != null)
+            {
+                try
+                {
+                    string filt = Request.QueryString["Bus"];
+                    ProductoDB productoDB = new ProductoDB();
+                    listaArticulo = productoDB.getProductos(filt);
+                    if(listaArticulo != null)
+                    {
+                        repRepetidor.DataSource = listaArticulo;
+                        repRepetidor.DataBind();
+                        Master.PageTitle = "Busqueda";
+                    }
+                    else
+                    {
+                        Response.Redirect("Default.aspx", false);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    Session.Add("Error", ex.ToString());
+                    Response.Redirect("Error.aspx", false);
+                }
+
+            }
+            // else Response.Redirect("Default.aspx", false);
         }
         protected void btnAgregarCarrito_Click(object sender, EventArgs e)
         {
@@ -60,7 +87,13 @@ namespace TP_Cuatrimestral_equipo_20A
                 carrito.listaCarrito = carrito.agregarProducto(producto, 1);
                 Session.Add("carrito", carrito);
             }
+            if (Request.QueryString["id"] !=null)
             Response.Redirect("Categorias.aspx?id=" + int.Parse(Request.QueryString["id"]), false);
+            else
+            {
+                string filtro = Request.QueryString["Bus"];
+                Response.Redirect("Categorias.aspx?Bus=" + filtro,false);
+            }
         }
         protected void btnAgregarOtro_Click(object sender, EventArgs e)
         {
@@ -79,7 +112,13 @@ namespace TP_Cuatrimestral_equipo_20A
                 carrito.listaCarrito = carrito.agregarProducto(producto, 1);
                 Session.Add("carrito", carrito);
             }
-            Response.Redirect("Categorias.aspx?id=" + int.Parse(Request.QueryString["id"]), false);
+            if (Request.QueryString["id"] != null)
+                Response.Redirect("Categorias.aspx?id=" + int.Parse(Request.QueryString["id"]), false);
+            else
+            {
+                string filtro = Request.QueryString["Bus"];
+                Response.Redirect("Categorias.aspx?Bus=" + filtro,false);
+            }
         }
         protected void repRepetidor_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {// Con este evento identifico el codigo de producto , para que al agregar un producto al carrito muestre otro boton

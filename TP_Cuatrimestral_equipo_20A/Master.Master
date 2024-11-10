@@ -35,7 +35,7 @@
                     <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
                     <%} %>
                     <asp:Label ID="lblNombre" Text="" Style="padding: 4px" runat="server" />
-                    <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 3)
+                    <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso >= 2)
                         { %>
                     <a class="text-black px-1" href="ListaProductos.aspx">Panel admin</a>
                     <%} %>

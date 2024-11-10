@@ -94,8 +94,8 @@ namespace TP_Cuatrimestral_equipo_20A
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            //List<Producto> lista = (List<Producto>)Session["listadoProducto"];
-            //List<Producto> listaFiltrada = lista.FindAll(x => x.nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            string filtro = txtFiltro.Text;           
+            Response.Redirect("Categorias.aspx?Bus=" + filtro, false);
         }
     }
 }
