@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" style="padding:50px">
+    <div class="container" style="padding:50px; background-color: whitesmoke;">
         <asp:GridView runat="server" ID="dgvProducto" DataKeyNames="id" CssClass="table" AutoGenerateColumns="false"
             OnSelectedIndexChanged="dgvProducto_SelectedIndexChanged" OnPageIndexChanging="dgvProducto_PageIndexChanging" AllowPaging="true" PageSize="5" PageIndex="0">
             <Columns>

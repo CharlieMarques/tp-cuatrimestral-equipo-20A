@@ -19,6 +19,7 @@ namespace TP_Cuatrimestral_equipo_20A
             CategoriaDB categoriaDB = new CategoriaDB();
             btnAgregarImagen.Enabled = false;
             btnAgregarImagen.Visible = false;
+            
             try
             {
                 txtId.Enabled = false;
@@ -35,6 +36,7 @@ namespace TP_Cuatrimestral_equipo_20A
                     ddlCategoria.DataTextField = "descripcion";
                     ddlCategoria.DataValueField= "id";
                     ddlCategoria.DataBind();
+                    Master.PageTitle = "Agregar Nuevo Producto";
                 }
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
                 if(id !="" && !IsPostBack)
@@ -55,6 +57,7 @@ namespace TP_Cuatrimestral_equipo_20A
                     txtImagenUrl_TextChanged(sender, e);
                     btnAgregarImagen.Enabled = true;
                     btnAgregarImagen.Visible = true;
+                    Master.PageTitle = "Modificar Producto";
                 }
                 
             }

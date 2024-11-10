@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container d-flex justify-content-center" style="padding: 50px;">
+    <div class="container d-flex justify-content-center" style="padding: 50px; background-color: whitesmoke">
         <div class="row">
             <div class="row mb-3">
                 <div class="col-md-6 mx-auto">
@@ -22,8 +22,8 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 mx-auto">
-                    <asp:Button Text="Ingresar" CssClass="btn btn-primary" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
-                    <a href="/" class="btn btn-link">Cancelar</a>
+                    <asp:Button Text="Ingresar" CssClass="btn btn-outline-success" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
+                    <a href="Default.aspx" class="btn btn-outline-danger btn-sm">Cancelar</a>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
     <div class= "d-flex justify-content-center">
     <h3>Mi Perfil</h3>
     </div>
-    <div class="row d-flex justify-content-center align-content-center">
+    <div class="row d-flex justify-content-center align-content-center" style="background-color: whitesmoke">
         <div class="col-md-2">
             <div class="mb-2">
                 <label class="form-label">Nombre</label>
