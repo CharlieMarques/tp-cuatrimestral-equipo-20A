@@ -10,6 +10,13 @@ namespace Dominio
     {
         public Producto _Producto {  get; set; }
         public int Cantidad {  get; set; }
+        public string _codigoProducto
+        {
+            get
+            {
+                return _Producto != null ? _Producto.codigoProducto : null;
+            }
+        }
         
         public decimal costo(Producto producto)
         {

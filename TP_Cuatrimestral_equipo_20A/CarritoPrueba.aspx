@@ -3,31 +3,24 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+        <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
 
-    <div class="container mt-4">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nombre del producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Costo total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <asp:Repeater runat="server" ID="repRepetidor">
-                    <ItemTemplate>
-                        <tr>
-                            <td><%# Eval("_Producto.nombre") %></td>
-                            <td><%# Eval("_Producto.precio", "{0:C}") %></td>
-                            <td><%# Eval("Cantidad") %></td>
-                            <td><%# ((Dominio.ElementoCarrito)Container.DataItem).costo(((Dominio.ElementoCarrito)Container.DataItem)._Producto).ToString("C") %></td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </tbody>
-        </table>
-    </div>
-
+        <div class="container" style="padding:50px; background-color: whitesmoke;">
+        <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
+            <asp:GridView runat="server" ID="dgvCarrito" cssClass="table" DataKeyNames="_codigoProducto" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvCarrito_SelectedIndexChanged" >
+                <Columns>
+                    <asp:BoundField HeaderText="Codigo De Producto" DataField="_Producto.codigoProducto"/>
+                    <asp:BoundField HeaderText="Nombre" DataField="_Producto.nombre"/>
+                    <asp:BoundField HeaderText="Cantidad" DataField="Cantidad"/>
+                    <asp:CommandField  HeaderText="Cambiar Cantidad" ShowSelectButton="true" SelectText="Cambiar"/>
+                </Columns>
+            </asp:GridView>
+            <asp:TextBox ID="txtCantidad" runat="server"></asp:TextBox>
+            <asp:RangeValidator ErrorMessage="Minimo 1 Maximo 6 unidades " ControlToValidate="txtCantidad" Type="Integer" MinimumValue="1" MaximumValue="6" runat="server" />
+            <asp:Button ID="btnAceptar" Text="Aceptar" runat="server" CssClass="btn btn-primary" OnClick="btnAceptar_Click"  />
+            </ContentTemplate>
+        </asp:UpdatePanel>
+          </div>               
 </asp:Content>
 
