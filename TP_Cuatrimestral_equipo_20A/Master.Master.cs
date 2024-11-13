@@ -97,5 +97,10 @@ namespace TP_Cuatrimestral_equipo_20A
             string filtro = txtFiltro.Text;           
             Response.Redirect("Categorias.aspx?Bus=" + filtro, false);
         }
+
+        protected void btnVerCarrito_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CarritoPrueba.aspx", false);
+        }
     }
 }

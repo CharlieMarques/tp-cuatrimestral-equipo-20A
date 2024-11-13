@@ -18,7 +18,7 @@
         <asp:ScriptManager ID="scripManager" runat="server"></asp:ScriptManager>
         <header>
             <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
-                <div class="d-flex text-center align-items-center" style="padding: 4px">
+                <div class="d-flex text-center align-items-center" style="padding: 4px;">
                     <a class="navbar-brand" style="padding: 4px" href="Default.aspx">
                         <img src="Images/logo.png" alt="Logo" width="25" height="25" />
                     </a>
@@ -69,16 +69,17 @@
         </div>
         <asp:UpdatePanel runat="server" ID="UPMaster" UpdateMode="Always">
             <ContentTemplate>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel"">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Carrito</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+                        <div style="max-height: 670px; overflow-y: auto;">                      
                             <asp:Repeater runat="server" ID="repRepetidor">
                                 <ItemTemplate>
-                                    <div class="card mb-4">
+                                    <div class="card mb-4"">
                                         <div class="row g-0">
                                             <div class="col-md-4">
                                                 <div id="carouselImage<%# Eval("_Producto.id") %>-cart" class="carousel slide" data-bs-ride="carousel">
@@ -126,11 +127,13 @@
                                     <p>Total a pagar: $<asp:Label ID="lblTotalPrice" runat="server" Text="0.00"></asp:Label></p>
                                 </div>
                                 <div>
-                                    <button class="btn btn-success" type="button">Comprar</button>
+                                    <asp:Button ID="btnVerCarrito" Text="Ver Carrito" runat="server" CssClass="btn btn-success" OnClick="btnVerCarrito_Click" />
+                                    <%--<button class="btn btn-success" type="button">Comprar</button>--%>
                                 </div>
                             </div>
                         </div>
                     </div>
+                        </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

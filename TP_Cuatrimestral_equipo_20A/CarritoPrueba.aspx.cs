@@ -28,6 +28,7 @@ namespace TP_Cuatrimestral_equipo_20A
                         lblPrecio.Text = "Costo total de la compra: "+ carrito.listaCarrito.Sum(item => item.Cantidad * item._Producto.precio).ToString();
                         dgvCarrito.DataSource = carrito.listaCarrito;
                         dgvCarrito.DataBind();
+                        Master.PageTitle = "Mi Carrito";
                     }
                     else
                     {
