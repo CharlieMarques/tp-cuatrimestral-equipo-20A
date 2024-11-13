@@ -15,6 +15,15 @@ namespace TP_Cuatrimestral_equipo_20A
     {
 
         /// <summary>
+        /// Control UPCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPCategoria;
+
+        /// <summary>
         /// Control repRepetidor.
         /// </summary>
         /// <remarks>

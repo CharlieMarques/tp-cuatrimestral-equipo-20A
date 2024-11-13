@@ -10,19 +10,19 @@ using Negocio;
 
 namespace TP_Cuatrimestral_equipo_20A
 {
-    
+
     public partial class Default : System.Web.UI.Page
     {
         protected List<Tuple<Producto, int>> carrito = new List<Tuple<Producto, int>>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (!IsPostBack)
             {
                 LoadProductos();
             }
-            
+
         }
         private void LoadProductos()
         {
@@ -32,49 +32,15 @@ namespace TP_Cuatrimestral_equipo_20A
 
         protected void btnAgregarCarrito_Click(object sender, EventArgs e)
         {
-            /*string id = ((Button)sender).CommandArgument;
-
-            List<Tuple<Producto, int>> carrito = Session["carrito"] as List<Tuple<Producto, int>> ?? new List<Tuple<Producto, int>>();
-            Producto producto = new ProductoDB().getById(int.Parse(id));
-
-            carrito.Add(Tuple.Create(producto, 1));
-            Session["carrito"] = carrito;*/
             string codProducto = ((Button)sender).CommandArgument;
-            Producto producto = new ProductoDB().FiltarPorCodigo(codProducto);
-            ElementoCarrito elementoCarrito = new ElementoCarrito();
-            Carrito carrito = new Carrito();
-            if (Session["carrito"] != null)
-            {
-                carrito = (Carrito)Session["carrito"];
+            agregarAlCarrito(codProducto);
 
-                carrito.agregarProducto(producto, 1);
-            }
-            else
-            {
-                carrito.listaCarrito = carrito.agregarProducto(producto, 1);
-                Session.Add("carrito", carrito);
-            }
-           Response.Redirect("Default.aspx", false);
         }
 
         protected void btnAgregarOtro_Click(object sender, EventArgs e)
         {
             string codProducto = ((Button)sender).CommandArgument;
-            Producto producto = new ProductoDB().FiltarPorCodigo(codProducto);
-            ElementoCarrito elementoCarrito = new ElementoCarrito();
-            Carrito carrito = new Carrito();
-            if (Session["carrito"] != null)
-            {
-                carrito = (Carrito)Session["carrito"];
-
-                carrito.agregarProducto(producto, 1);
-            }
-            else
-            {
-                carrito.listaCarrito = carrito.agregarProducto(producto, 1);
-                Session.Add("carrito", carrito);
-            }
-            Response.Redirect("Default.aspx", false);
+            agregarAlCarrito(codProducto);
         }
 
         protected void repRepetidor_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -101,5 +67,28 @@ namespace TP_Cuatrimestral_equipo_20A
                 }
             }
         }
+        public void agregarAlCarrito(string codProducto)
+        {
+            Producto producto = new ProductoDB().FiltarPorCodigo(codProducto);
+            Carrito carrito = new Carrito();
+            if (Session["carrito"] != null)
+            {
+                carrito = (Carrito)Session["carrito"];
+
+                carrito.agregarProducto(producto, 1);
+            }
+            else
+            {
+                carrito.listaCarrito = carrito.agregarProducto(producto, 1);
+                Session.Add("carrito", carrito);
+            }
+            if (this.Master is Master masterPage)
+            {
+                masterPage.LoadCarrito();
+                masterPage.UpdateTotals();
+            }
+            UPDefault.Update();
+            LoadProductos();
+        }        
     }
 }

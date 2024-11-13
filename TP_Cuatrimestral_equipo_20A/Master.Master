@@ -15,6 +15,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="scripManager" runat="server"></asp:ScriptManager>
         <header>
             <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
                 <div class="d-flex text-center align-items-center" style="padding: 4px">
@@ -52,11 +53,11 @@
                     </div>
                     <div class="row align-items-center">
                         <div class="col-6 d-flex">
-                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="btn btn-outline-dark dropdown-toggle m-1" style="width: 125px;" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
-                            <asp:ListItem Text="Categorías" Value="" />
+                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="btn btn-outline-dark dropdown-toggle m-1" Style="width: 125px;" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
+                                <asp:ListItem Text="Categorías" Value="" />
                             </asp:DropDownList>
-                            <asp:TextBox runat="server" CssClass="form-control m-1" style="width:225px" ID="txtFiltro"></asp:TextBox>
-                            <asp:Button runat="server" ID="btnBuscar" CssClass="btn btn-outline-dark m-1" Text="Buscar" OnClick="btnBuscar_Click"/>
+                            <asp:TextBox runat="server" CssClass="form-control m-1" Style="width: 225px" ID="txtFiltro"></asp:TextBox>
+                            <asp:Button runat="server" ID="btnBuscar" CssClass="btn btn-outline-dark m-1" Text="Buscar" OnClick="btnBuscar_Click" />
                         </div>
                     </div>
                 </div>
@@ -66,72 +67,76 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Carrito</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
-                    <asp:Repeater runat="server" ID="repRepetidor">
-                        <ItemTemplate>
-                            <div class="card mb-4">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <div id="carouselImage<%# Eval("_Producto.id") %>-cart" class="carousel slide" data-bs-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <asp:Repeater runat="server" DataSource='<%# Eval("_Producto.imagenes") %>'>
-                                                    <ItemTemplate>
-                                                        <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
-                                                            <img src="<%# Eval("urlImagen") %>" class="d-block" style="max-height: 200px;" alt="<%# Eval("id") %>-cart">
-                                                        </div>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
+        <asp:UpdatePanel runat="server" ID="UPMaster" UpdateMode="Always">
+            <ContentTemplate>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Carrito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+                            <asp:Repeater runat="server" ID="repRepetidor">
+                                <ItemTemplate>
+                                    <div class="card mb-4">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <div id="carouselImage<%# Eval("_Producto.id") %>-cart" class="carousel slide" data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        <asp:Repeater runat="server" DataSource='<%# Eval("_Producto.imagenes") %>'>
+                                                            <ItemTemplate>
+                                                                <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
+                                                                    <img src="<%# Eval("urlImagen") %>" class="d-block" style="max-height: 200px;" alt="<%# Eval("id") %>-cart">
+                                                                </div>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Previous</span>
-                                            </button>
-                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselImage<%# Eval("_Producto.id") %>-cart" data-bs-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="visually-hidden">Next</span>
-                                            </button>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><%# Eval("_Producto.nombre") %></h5>
+                                                    <p class="card-text">Cantidad: <%# Eval("Cantidad") %></p>
+                                                    <p class="card-text">Precio unitario: $<%# Eval("_Producto.precio") %></p>
+                                                    <p class="card-text">Precio Total: <%#  ((Dominio.ElementoCarrito)Container.DataItem).costo(((Dominio.ElementoCarrito)Container.DataItem)._Producto).ToString("C")%></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><%# Eval("_Producto.nombre") %></h5>
-                                            <p class="card-text">Cantidad: <%# Eval("Cantidad") %></p>
-                                            <p class="card-text">Precio unitario: $<%# Eval("_Producto.precio") %></p>
-                                            <p class="card-text">Precio Total: <%#  ((Dominio.ElementoCarrito)Container.DataItem).costo(((Dominio.ElementoCarrito)Container.DataItem)._Producto).ToString("C")%></p>
-                                        </div>
-                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                        <div class="container text-end">
+                            <div class="row">
+                                <div>
+                                    <p>
+                                        Total de productos:
+                                <asp:Label ID="lblTotalItems" runat="server" Text="0"></asp:Label>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>Total a pagar: $<asp:Label ID="lblTotalPrice" runat="server" Text="0.00"></asp:Label></p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-success" type="button">Comprar</button>
                                 </div>
                             </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-                <div class="container text-end">
-                    <div class="row">
-                        <div>
-                            <p>
-                                Total de productos:
-                                <asp:Label ID="lblTotalItems" runat="server" Text="0"></asp:Label>
-                            </p>
-                        </div>
-                        <div>
-                            <p>Total a pagar: $<asp:Label ID="lblTotalPrice" runat="server" Text="0.00"></asp:Label></p>
-                        </div>
-                        <div>
-                            <button class="btn btn-success" type="button">Comprar</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
-<footer>
-    <h6 class="text-center" style="padding: 50px">Equipo 20A Programacion III 2024</h6>
-</footer>
+    <footer>
+        <h6 class="text-center" style="padding: 50px">Equipo 20A Programacion III 2024</h6>
+    </footer>
 </body>
 </html>

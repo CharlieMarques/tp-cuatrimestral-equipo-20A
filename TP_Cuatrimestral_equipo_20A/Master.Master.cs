@@ -17,7 +17,7 @@ namespace TP_Cuatrimestral_equipo_20A
             get { return Page.Title; }
             set { Page.Title = value; lblPageTitle.Text = value; }
         }
-        private void LoadCarrito()
+        public void LoadCarrito()
         {
             //carrito = Session["carrito"] as List<Tuple<Producto, int>> ?? new List<Tuple<Producto, int>>();
             Carrito carrito = new Carrito();
@@ -76,7 +76,7 @@ namespace TP_Cuatrimestral_equipo_20A
             Session.Clear();
             Response.Redirect("Default.aspx", false);
         }
-        protected void UpdateTotals()
+        public void UpdateTotals()
         {
             if (Session["carrito"] != null)
             {
