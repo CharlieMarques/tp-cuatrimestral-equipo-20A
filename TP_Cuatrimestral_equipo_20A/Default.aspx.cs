@@ -17,12 +17,19 @@ namespace TP_Cuatrimestral_equipo_20A
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (!IsPostBack)
+            try
             {
-                LoadProductos();
+                if (!IsPostBack)
+                {
+                    LoadProductos();
+                }
             }
+            catch (Exception ex)
+            {
 
+                Session.Add("Error",ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
         private void LoadProductos()
         {
@@ -69,26 +76,37 @@ namespace TP_Cuatrimestral_equipo_20A
         }
         public void agregarAlCarrito(string codProducto)
         {
-            Producto producto = new ProductoDB().FiltarPorCodigo(codProducto);
-            Carrito carrito = new Carrito();
-            if (Session["carrito"] != null)
+            try
             {
-                carrito = (Carrito)Session["carrito"];
+                Producto producto = new ProductoDB().FiltarPorCodigo(codProducto);
 
-                carrito.agregarProducto(producto, 1);
+                Carrito carrito = new Carrito();
+                if (Session["carrito"] != null)
+                {
+                    carrito = (Carrito)Session["carrito"];
+
+                    carrito.agregarProducto(producto, 1);
+                }
+                else
+                {
+                    carrito.listaCarrito = carrito.agregarProducto(producto, 1);
+                    Session.Add("carrito", carrito);
+                }
+                if (this.Master is Master masterPage)
+                {
+                    masterPage.LoadCarrito();
+                    masterPage.UpdateTotals();
+                }
+                UPDefault.Update();
+                LoadProductos();
             }
-            else
+            catch (Exception ex)
             {
-                carrito.listaCarrito = carrito.agregarProducto(producto, 1);
-                Session.Add("carrito", carrito);
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
-            if (this.Master is Master masterPage)
-            {
-                masterPage.LoadCarrito();
-                masterPage.UpdateTotals();
-            }
-            UPDefault.Update();
-            LoadProductos();
-        }        
+
+        }
     }
 }

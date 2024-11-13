@@ -17,6 +17,13 @@ namespace Dominio
                 return _Producto != null ? _Producto.codigoProducto : null;
             }
         }
+        public decimal PrecioTotal
+        {
+            get
+            {
+                return _Producto != null ? _Producto.precio * Cantidad : 0;
+            }
+        }
         
         public decimal costo(Producto producto)
         {
