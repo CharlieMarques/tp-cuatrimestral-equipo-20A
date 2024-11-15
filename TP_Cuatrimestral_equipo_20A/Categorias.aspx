@@ -21,6 +21,7 @@
                     <asp:Repeater runat="server" ID="repRepetidor">
                         <ItemTemplate>
                             <div class="card" style="margin: 10px; width: 30%">
+                                <a href='<%#"Productos.aspx?id="+Eval("id") %>'style="text-decoration: none; color: inherit;">
                                 <div id="carouselImage<%# Eval("id") %>" class="carousel slide" style="background-color: #808080">
                                     <div class="carousel-inner">
                                         <asp:Repeater runat="server" DataSource='<%# Eval("imagenes") %>'>
@@ -40,6 +41,7 @@
                                         </button>
                                     </div>
                                 </div>
+                                
                                 <div class="card-body">
                                     <h5 class="card-title"><%# Eval("nombre") %></h5>
                                     <p class="card-text"><%# Eval("descripcion") %></p>
@@ -55,6 +57,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
