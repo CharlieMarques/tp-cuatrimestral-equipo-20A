@@ -12,8 +12,7 @@ namespace TP_Cuatrimestral_equipo_20A
     public partial class Productos : System.Web.UI.Page
     {
         public Producto producto = new Producto();
-        public ProductoDB productoDB = new ProductoDB();
-        private int index = 0;
+        public ProductoDB productoDB = new ProductoDB();     
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -49,7 +48,6 @@ namespace TP_Cuatrimestral_equipo_20A
                 UPProductos.Update();
                 checkCarrito();
                 loadProductos();
-               // Response.Redirect("Productos.aspx?id="+idProd,false);
             }
             catch (Exception ex)
             {
@@ -60,15 +58,38 @@ namespace TP_Cuatrimestral_equipo_20A
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                producto = getProducto();
+                ElementoCarrito elementoCarrito = new ElementoCarrito();
+                elementoCarrito._Producto = producto;
+                elementoCarrito.Cantidad = int.Parse (ddlCantidad.Text);
+                Session.Add("Compra", elementoCarrito);
+                Response.Redirect("FormaEntrega.aspx", false);
+            }
+            catch (Exception ex )
+            {
 
+                Session.Add("Error",ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void linkImagen_Click(object sender, EventArgs e)
         {
             LinkButton linkImagen = (LinkButton)sender;
-            string urlImage = linkImagen.CommandArgument;
+            try
+            {
+                string urlImage = linkImagen.CommandArgument;
 
-            imgProducto.ImageUrl = urlImage;
+                imgProducto.ImageUrl = urlImage;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
         public void loadProductos()
         {
@@ -123,19 +144,29 @@ namespace TP_Cuatrimestral_equipo_20A
             Carrito carrito = new Carrito();
             ElementoCarrito elementoCarrito = new ElementoCarrito();
             int idProd = -1;
-            if (Request.QueryString["id"] != null)
+            try
             {
-                idProd = int.Parse(Request.QueryString["id"]);
-                if (Session["carrito"] != null)
+                if (Request.QueryString["id"] != null)
                 {
-                    carrito = (Carrito)Session["carrito"];
-                    elementoCarrito = carrito.listaCarrito.Find(item => item._Producto.id == idProd);
-                    if (elementoCarrito != null)
+                    idProd = int.Parse(Request.QueryString["id"]);
+                    if (Session["carrito"] != null)
                     {
-                        btnQuitarCarrito.Enabled = true;
-                        btnQuitarCarrito.Visible = true;
-                        btnAgregarCarrito.Enabled = false;
-                        btnAgregarCarrito.Visible = false;
+                        carrito = (Carrito)Session["carrito"];
+                        elementoCarrito = carrito.listaCarrito.Find(item => item._Producto.id == idProd);
+                        if (elementoCarrito != null)
+                        {
+                            btnQuitarCarrito.Enabled = true;
+                            btnQuitarCarrito.Visible = true;
+                            btnAgregarCarrito.Enabled = false;
+                            btnAgregarCarrito.Visible = false;
+                        }
+                        else
+                        {
+                            btnQuitarCarrito.Enabled = false;
+                            btnQuitarCarrito.Visible = false;
+                            btnAgregarCarrito.Enabled = true;
+                            btnAgregarCarrito.Visible = true;
+                        }
                     }
                     else
                     {
@@ -145,15 +176,12 @@ namespace TP_Cuatrimestral_equipo_20A
                         btnAgregarCarrito.Visible = true;
                     }
                 }
-                else
-                {
-                    btnQuitarCarrito.Enabled = false;
-                    btnQuitarCarrito.Visible = false;
-                    btnAgregarCarrito.Enabled = true;
-                    btnAgregarCarrito.Visible = true;
-                }
             }
-
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }           
         }
 
         protected void btnQuitarCarrito_Click(object sender, EventArgs e)

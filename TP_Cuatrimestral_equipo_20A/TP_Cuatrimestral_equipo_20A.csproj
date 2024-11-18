@@ -84,7 +84,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DireccionEnvio.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="FormaEntrega.aspx" />
     <Content Include="FormularioProducto.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ListaProductos.aspx" />
@@ -122,12 +124,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DireccionEnvio.aspx.cs">
+      <DependentUpon>DireccionEnvio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DireccionEnvio.aspx.designer.cs">
+      <DependentUpon>DireccionEnvio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormaEntrega.aspx.cs">
+      <DependentUpon>FormaEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormaEntrega.aspx.designer.cs">
+      <DependentUpon>FormaEntrega.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioProducto.aspx.cs">
       <DependentUpon>FormularioProducto.aspx</DependentUpon>
