@@ -12,14 +12,12 @@ namespace TP_Cuatrimestral_equipo_20A
 {
     public partial class Master : System.Web.UI.MasterPage
     {
-        protected List<Tuple<Producto, int>> carrito;
         public string PageTitle {
             get { return Page.Title; }
             set { Page.Title = value; lblPageTitle.Text = value; }
         }
         public void LoadCarrito()
         {
-            //carrito = Session["carrito"] as List<Tuple<Producto, int>> ?? new List<Tuple<Producto, int>>();
             Carrito carrito = new Carrito();
             if (Session["carrito"] != null)
             {
@@ -31,7 +29,6 @@ namespace TP_Cuatrimestral_equipo_20A
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriaDB categoriaDB = new CategoriaDB();
-            //UsuarioDB usuarioDB = new UsuarioDB();
             PedidoDB pedidoDB = new PedidoDB();
             ClienteDB clienteDB = new ClienteDB();
 

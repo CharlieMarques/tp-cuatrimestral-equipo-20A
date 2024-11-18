@@ -42,22 +42,31 @@ namespace TP_Cuatrimestral_equipo_20A
         protected global::System.Web.UI.WebControls.Image imgProducto;
 
         /// <summary>
-        /// Control btnAtras.
+        /// Control lblNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAtras;
+        protected global::System.Web.UI.WebControls.Label lblNombre;
 
         /// <summary>
-        /// Control btnADelante.
+        /// Control lblPrecio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnADelante;
+        protected global::System.Web.UI.WebControls.Label lblPrecio;
+
+        /// <summary>
+        /// Control ddlCantidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCantidad;
 
         /// <summary>
         /// Control btnComprar.
@@ -76,6 +85,15 @@ namespace TP_Cuatrimestral_equipo_20A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarCarrito;
+
+        /// <summary>
+        /// Control btnQuitarCarrito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnQuitarCarrito;
 
         /// <summary>
         /// Propiedad Master.
