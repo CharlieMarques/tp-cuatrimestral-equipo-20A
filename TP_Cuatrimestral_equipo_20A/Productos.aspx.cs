@@ -108,6 +108,7 @@ namespace TP_Cuatrimestral_equipo_20A
                     repImagenes.DataBind();
                     imgProducto.ImageUrl = producto.imagenes[0].urlImagen;
                     lblNombre.Text = producto.nombre;
+                    lblDescripcion.Text = producto.descripcion;
                     lblPrecio.Text = producto.precio.ToString("C");
                     Master.PageTitle = "Producto";
                 }

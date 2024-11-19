@@ -1,28 +1,42 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Categorias.aspx.cs" Inherits="TP_Cuatrimestral_equipo_20A.Categorias" %>
-
 <%@ MasterType VirtualPath="~/Master.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .card {
             height: 100%;
+            width: auto;
             display: flex;
             flex-direction: column;
+        }
+        .card img {
+            object-fit: scale-down;
+            background-color: white;
+            width: 100%;
+            height: auto;
+        }
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .carousel-item img {
+            max-height: 400px;
+            min-height: 200px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel runat="server" ID="UPCategoria" UpdateMode="Conditional">
         <ContentTemplate>
-
-
-            <div class="container mt-4" style="background-color: whitesmoke">
+            <div class="container mt-4">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <asp:Repeater runat="server" ID="repRepetidor">
                         <ItemTemplate>
-                            <div class="card" style="margin: 10px; width: 30%">
+                            <div class="card" style="margin: 10px; padding:0px; width: 30%">
                                 <a href='<%#"Productos.aspx?id="+Eval("id") %>'style="text-decoration: none; color: inherit;">
-                                <div id="carouselImage<%# Eval("id") %>" class="carousel slide" style="background-color: #808080">
+                                <div id="carouselImage<%# Eval("id") %>" class="carousel slide">
                                     <div class="carousel-inner">
                                         <asp:Repeater runat="server" DataSource='<%# Eval("imagenes") %>'>
                                             <ItemTemplate>
