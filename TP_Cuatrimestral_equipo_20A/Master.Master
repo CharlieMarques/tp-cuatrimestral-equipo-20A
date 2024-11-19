@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="TP_Cuatrimestral_equipo_20A.Master" %>
-
 <!DOCTYPE html>
 
 <html>
@@ -12,38 +11,82 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="scripManager" runat="server"></asp:ScriptManager>
         <header>
             <div class="container-login-registro d-flex align-items-center justify-content-center bg-body-secondary py-1 px-3">
-                <div class="d-flex text-center align-items-center" style="padding: 4px;">
-                    <a class="navbar-brand" style="padding: 4px" href="Default.aspx">
-                        <img src="Images/logo.png" alt="Logo" width="25" height="25" />
-                    </a>
-                    <% if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
-                        { %>
-                    <a class="text-black px-1" href="Login.aspx">Inicia Sesión</a>
-                    <span>con tu cuenta o </span>
-                    <a class="text-black px-1" href="SignUp.aspx">Registrate</a>
-                    <span>Para recibir las ultimas promociones</span>
-                    <% } %>
-                    <% else
-                        { %>
-                    <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1)
-                        { %>
-                    <a class="text-black px-1" href="MiPerfil.aspx">Mi Perfil</a>
-                    <%} %>
-                    <asp:Label ID="lblNombre" Text="" Style="padding: 4px" runat="server" />
-                    <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso >= 2)
-                        { %>
-                    <a class="text-black px-1" href="ListaProductos.aspx">Panel admin</a>
-                    <%} %>
-                    <asp:Button Text="Cerrar Sesion" CssClass="btn btn-link" Style="padding: 4px; color: black; border: none;" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
-                    <%} %>
-                    <a class="text-black px-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Mi Carrito</a>
+
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="Default.aspx">
+                            <img class="navbar-toggler-icon" src="Images/logo.png" alt="Logo" width="30" height="24" />
+                            Inicio
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                                <li class="nav-item dropdown">
+                                    <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="btn btn-outline-dark dropdown-toggle m-1" Style="width: 125px;" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
+                                        <asp:ListItem Text="Categorías" Value="" />
+                                    </asp:DropDownList>
+                                </li>
+                                <% if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+                                    { %>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-dark mx-1" href="Login.aspx">Inicia Sesión</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-dark mx-1" href="SignUp.aspx">Registrate</a>
+                                </li>
+                                <% }
+                                else
+                                { %>
+                                <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1)
+                                    { %>
+                                <li class="nav-item">
+                                    <a class="nav-link text-black mx-1" href="MiPerfil.aspx">Mi Perfil</a>
+                                </li>
+                                <% } %>
+                                <li class="nav-item">
+                                    <asp:Label ID="lblNombre" Text="" CssClass="nav-link text-black mx-1" runat="server" />
+                                </li>
+                                <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 3)
+                                    { %>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-info" style="color: black" href="ListaProductos.aspx">Panel admin</a>
+                                </li>
+                                <% } %>
+                                <li class="nav-item">
+                                    <asp:Button Text="Cerrar Sesión" CssClass="btn btn-danger mx-1" ID="btnLogout" OnClick="btnLogout_Click" runat="server" />
+                                </li>
+                                <% } %>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-dark mx-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 2px" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                        </svg>
+                                        Carrito
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="d-flex" role="search">
+                                <asp:TextBox runat="server" CssClass="form-control m-1" Style="width: 225px" ID="txtFiltro"></asp:TextBox>
+                                <asp:Button runat="server" ID="btnBuscar" CssClass="btn btn-outline-dark m-1" Text="Buscar" OnClick="btnBuscar_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="d-flex text-center align-items-center">
+                    <a class="navbar-brand" href="Default.aspx"></a>
+                    <div class="row align-items-center">
+                        <div class="col-6 d-flex">
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="container mt-4 text-center">
@@ -51,15 +94,6 @@
                     <div class="col align-self-center">
                         <h2>
                             <asp:Label runat="server" ID="lblPageTitle" Text="Nuestros Productos"></asp:Label></h2>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="col-6 d-flex">
-                            <asp:DropDownList runat="server" ID="ddlCategoria" CssClass="btn btn-outline-dark dropdown-toggle m-1" Style="width: 125px;" AppendDataBoundItems="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
-                                <asp:ListItem Text="Categorías" Value="" />
-                            </asp:DropDownList>
-                            <asp:TextBox runat="server" CssClass="form-control m-1" Style="width: 225px" ID="txtFiltro"></asp:TextBox>
-                            <asp:Button runat="server" ID="btnBuscar" CssClass="btn btn-outline-dark m-1" Text="Buscar" OnClick="btnBuscar_Click" />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -140,6 +174,6 @@
     </form>
 </body>
 </html>
-    <footer>
-        <h6 class="text-center" style="padding: 50px">Equipo 20A Programacion III 2024</h6>
-    </footer>
+<footer>
+    <h6 class="text-center" style="padding: 50px">Equipo 20A Programacion III 2024</h6>
+</footer>
