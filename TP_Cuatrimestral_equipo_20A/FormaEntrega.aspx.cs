@@ -13,10 +13,15 @@ namespace TP_Cuatrimestral_equipo_20A
     {
         public Producto producto = new Producto();
         public ProductoDB productoDB = new ProductoDB();
+        public Dominio.Compra compra = new Dominio.Compra();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+                {
+                    Response.Redirect("Default.aspx", false);
+                }
                 RBRetiro.Checked = true;
                 lblPrecioEnvio.Text = "Costo de Retiro: $0";
                 loadProducto(0);
@@ -28,6 +33,21 @@ namespace TP_Cuatrimestral_equipo_20A
             if(RBEnvio.Checked)
             {
 
+            }
+            else if(RBRetiro.Checked)
+            {
+                
+                if (Session["compra"] != null)
+                {                     
+                    ElementoCarrito elementoCarrito = (ElementoCarrito)Session["compra"];
+                    compra.listaCompra.Add(elementoCarrito);
+                    compra.cliente = (Cliente)Session["cliente"];
+                    compra.cuenta = (Cuenta)Session["cuenta"];
+                    compra.CostoEnvio = 0;
+                    Session.Add("compraRetiro", compra);
+                    Response.Redirect("DireccionEnvio.aspx", false);
+                }
+                
             }
         }
         public void loadProducto(decimal costoEntrega)

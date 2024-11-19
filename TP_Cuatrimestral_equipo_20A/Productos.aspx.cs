@@ -57,9 +57,15 @@ namespace TP_Cuatrimestral_equipo_20A
         }
 
         protected void btnComprar_Click(object sender, EventArgs e)
-        {
+        {           
             try
             {
+                
+                if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+                {
+                    lblComprar.Text = "Debe iniciar sesion o registrarse para comprar";
+                    return;
+                }
                 producto = getProducto();
                 ElementoCarrito elementoCarrito = new ElementoCarrito();
                 elementoCarrito._Producto = producto;
