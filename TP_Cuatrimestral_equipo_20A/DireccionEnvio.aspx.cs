@@ -64,25 +64,34 @@ namespace TP_Cuatrimestral_equipo_20A
             DireccionDB direccionDB = new DireccionDB();
             try
             {
+                
                 Cuenta cuenta = (Cuenta)Session["cuenta"];
                 Cliente cliente = (Cliente)Session["Cliente"];
                 int idCuenta = cuenta.Id;
                 int idCliente = cliente.Id; 
                 
                 listaDireccion = direccionDB.toList(idCuenta,idCliente);
-                txtProvincia.Text = listaDireccion[0].Provincia.ToString();
-                txtLocalidad.Text = listaDireccion[0].Localidad.ToString();
-                txtCalle.Text = listaDireccion[0].Calle.ToString();
-                txtNumero.Text = listaDireccion[0].Altura.ToString();
-                txtCodigoPostal.Text = listaDireccion[0].CodigoPostal.ToString();
-                txtReferencias.Text = listaDireccion[0].Referencia.ToString();
-                activarDesactivarFormulario(true);
+                if(listaDireccion != null)
+                {
+                    txtProvincia.Text = listaDireccion[0].Provincia.ToString();
+                    txtLocalidad.Text = listaDireccion[0].Localidad.ToString();
+                    txtCalle.Text = listaDireccion[0].Calle.ToString();
+                    txtNumero.Text = listaDireccion[0].Altura.ToString();
+                    txtCodigoPostal.Text = listaDireccion[0].CodigoPostal.ToString();
+                    txtReferencias.Text = listaDireccion[0].Referencia.ToString();
+                    activarDesactivarFormulario(true);
+                }
+                else
+                {
+                    RBNuevaDireccion.Checked = true;
+                    //limpiarCampos();
+                }
             }
             catch (Exception ex)
             {
-
-                Session.Add("Error", ex.ToString());
-                Response.Redirect("Error.aspx", false);
+                RBNuevaDireccion.Checked = true;
+                //Session.Add("Error", ex.ToString());
+                //Response.Redirect("Error.aspx", false);
             }
         }
         public void activarDesactivarFormulario(bool activar)

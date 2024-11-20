@@ -45,7 +45,7 @@
                                 <% }
                                 else
                                 { %>
-                                <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 1)
+                                <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso >= 1)
                                     { %>
                                 <li class="nav-item">
                                     <a class="nav-link text-black mx-1" href="MiPerfil.aspx">Mi Perfil</a>
@@ -54,7 +54,7 @@
                                 <li class="nav-item">
                                     <asp:Label ID="lblNombre" Text="" CssClass="nav-link text-black mx-1" runat="server" />
                                 </li>
-                                <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso == 3)
+                                <% if (((Dominio.Cuenta)Session["cuenta"]).NivelAcceso >= 2)
                                     { %>
                                 <li class="nav-item">
                                     <a class="nav-link btn btn-info" style="color: black" href="ListaProductos.aspx">Panel admin</a>

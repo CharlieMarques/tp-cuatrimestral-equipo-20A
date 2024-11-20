@@ -67,7 +67,6 @@
   <ItemGroup>
     <Content Include="CarritoPrueba.aspx" />
     <Content Include="Categorias.aspx" />
-    <Content Include="OrdenCompra.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -93,6 +92,7 @@
     <Content Include="ListaProductos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MiPerfil.aspx" />
+    <Content Include="OrdenCompra.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -117,13 +117,6 @@
     </Compile>
     <Compile Include="Categorias.aspx.designer.cs">
       <DependentUpon>Categorias.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="OrdenCompra.aspx.cs">
-      <DependentUpon>OrdenCompra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OrdenCompra.aspx.designer.cs">
-      <DependentUpon>OrdenCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -190,6 +183,13 @@
     </Compile>
     <Compile Include="MiPerfil.aspx.designer.cs">
       <DependentUpon>MiPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenCompra.aspx.cs">
+      <DependentUpon>OrdenCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenCompra.aspx.designer.cs">
+      <DependentUpon>OrdenCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productos.aspx.cs">
       <DependentUpon>Productos.aspx</DependentUpon>
