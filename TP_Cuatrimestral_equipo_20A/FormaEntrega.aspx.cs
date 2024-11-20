@@ -30,24 +30,30 @@ namespace TP_Cuatrimestral_equipo_20A
 
         protected void btnContinuar_Click(object sender, EventArgs e)
         {
-            if(RBEnvio.Checked)
+            if (RBEnvio.Checked)
+            {
+                ElementoCarrito elementoCarrito = (ElementoCarrito)Session["compra"];
+                compra.listaCompra.Add(elementoCarrito);
+                compra.cliente = (Cliente)Session["cliente"];
+                compra.cuenta = (Cuenta)Session["cuenta"];
+                compra.CostoEnvio = 500;
+                Session.Add("compraEnvio", compra);
+                Response.Redirect("DireccionEnvio.aspx", false);
+            }
+            else if (RBRetiro.Checked)
             {
 
-            }
-            else if(RBRetiro.Checked)
-            {
-                
                 if (Session["compra"] != null)
-                {                     
+                {
                     ElementoCarrito elementoCarrito = (ElementoCarrito)Session["compra"];
                     compra.listaCompra.Add(elementoCarrito);
                     compra.cliente = (Cliente)Session["cliente"];
                     compra.cuenta = (Cuenta)Session["cuenta"];
                     compra.CostoEnvio = 0;
                     Session.Add("compraRetiro", compra);
-                    Response.Redirect("DireccionEnvio.aspx", false);
+                    Response.Redirect("OrdenCompra.aspx", false);
                 }
-                
+
             }
         }
         public void loadProducto(decimal costoEntrega)

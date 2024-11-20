@@ -7,7 +7,20 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container d-flex justify-content-center " style="padding-left: 20%; padding-right: 20%; padding-top: 20px; background-color: whitesmoke">
         <div class="row mx-auto">
-            <div class="row mb-3">
+                                <div class="col col-6" style="background-color: whitesmoke;">
+                        <span style="font-size: 20px">Elegi la Direccion de entrega</span>
+                        <div class="form-check" style="border-bottom: 1px solid grey; width: 350px; height: 50px; font-size: 16px; padding-top:17px">
+                            <asp:RadioButton ID="RBDireccionActual" runat="server" GroupName="Direccion" OnCheckedChanged="RBDireccionActual_CheckedChanged" AutoPostBack="true" />
+                            <asp:Label Text="Direccion actual" runat="server" ID="lblDireccionActual" Style="padding-left: 15px" />
+                            <%--<asp:Label Text="$500" runat="server" ID="lblCostoEnvio" />--%>
+                        </div>
+                        <div class="form-check" style="border-bottom: 1px solid grey; width: 350px; height: 50px; font-size: 16px; padding-top:17px">
+                            <asp:RadioButton ID="RBNuevaDireccion" runat="server" GroupName="Direccion" OnCheckedChanged="RBNuevaDireccion_CheckedChanged" AutoPostBack="true" />
+                            <asp:Label Text="Nueva direccion" runat="server" ID="lblDireccionNueva" Style="padding-left: 15px" />
+                            <%--<asp:Label Text="Gratis" runat="server" ID="lblCostoRetiro" />--%>
+                        </div>
+                    </div>
+            <div class="row mb-3" style="padding-top:20px">
                 <div class="col-2" style="padding-top: 6px">
                     <asp:label cssclass="form-label" text="Provincia" runat="server" id="lblProvincia" />
                 </div>

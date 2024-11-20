@@ -37,7 +37,7 @@ namespace TP_Cuatrimestral_equipo_20A
                 direccion.cuenta = (Cuenta)Session["cuenta"];
                 direccion.cliente = new Cliente();
                 direccion.cliente = (Cliente)Session["cliente"];
-                direccion.Id = direccionDB.agregarDireccion(direccion);
+                direccion.Id = RBNuevaDireccion.Checked ? direccionDB.agregarDireccion(direccion) : -1;               
                 Session.Add("direccion", direccion);
                 Response.Redirect("OrdenCompra.aspx", false);
 
@@ -47,6 +47,62 @@ namespace TP_Cuatrimestral_equipo_20A
                 Session.Add("Error",ex.ToString());
                 Response.Redirect("Error.aspx",false);
             }
+        }
+
+        protected void RBNuevaDireccion_CheckedChanged(object sender, EventArgs e)
+        {
+            limpiarCampos();
+        }
+
+        protected void RBDireccionActual_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadDireccion();
+        }
+        public void LoadDireccion()
+        {
+            List<Direccion> listaDireccion = new List<Direccion>();
+            DireccionDB direccionDB = new DireccionDB();
+            try
+            {
+                Cuenta cuenta = (Cuenta)Session["cuenta"];
+                Cliente cliente = (Cliente)Session["Cliente"];
+                int idCuenta = cuenta.Id;
+                int idCliente = cliente.Id; 
+                
+                listaDireccion = direccionDB.toList(idCuenta,idCliente);
+                txtProvincia.Text = listaDireccion[0].Provincia.ToString();
+                txtLocalidad.Text = listaDireccion[0].Localidad.ToString();
+                txtCalle.Text = listaDireccion[0].Calle.ToString();
+                txtNumero.Text = listaDireccion[0].Altura.ToString();
+                txtCodigoPostal.Text = listaDireccion[0].CodigoPostal.ToString();
+                txtReferencias.Text = listaDireccion[0].Referencia.ToString();
+                activarDesactivarFormulario(true);
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+        public void activarDesactivarFormulario(bool activar)
+        {
+            txtCalle.ReadOnly = activar;
+            txtNumero.ReadOnly = activar;
+            txtCodigoPostal.ReadOnly = activar;
+            txtLocalidad.ReadOnly = activar;
+            txtProvincia.ReadOnly = activar;
+            txtReferencias.ReadOnly = activar;
+        }
+        public void limpiarCampos()
+        {
+            txtProvincia.Text = "";
+            txtLocalidad.Text = "";
+            txtCalle.Text = "";
+            txtNumero.Text = "";
+            txtCodigoPostal.Text = "";
+            txtReferencias.Text = "";
+            activarDesactivarFormulario(false);
         }
     }
 }
