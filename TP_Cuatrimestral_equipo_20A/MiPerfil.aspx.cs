@@ -35,6 +35,7 @@ namespace TP_Cuatrimestral_equipo_20A
 						txtTelefono.ReadOnly = true;
 						btnAceptar.Visible = false;
 					}
+					Master.PageTitle = "Mi Perfil";
 				}
 			}
 			catch (Exception ex)
