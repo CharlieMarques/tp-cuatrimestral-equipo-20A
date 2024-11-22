@@ -64,6 +64,9 @@
                             <div class="row row-cols-2 d-grid gap-2 d-md-block"style="padding-top:50px;padding-left:180px">
                                 <asp:Button Text="Pagar" runat="server" ID="btnPagar" OnClick="btnPagar_Click" CssClass="btn btn-success" />
                             </div>
+                            <div class="row row-cols-2 d-grid gap-2 d-md-block"style="padding-top:1px;padding-left:180px">
+                                <asp:Label Text="" runat="server" ID="lblSaldo" ForeColor="#cc3300" />
+                            </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>

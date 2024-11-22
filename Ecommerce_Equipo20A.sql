@@ -187,7 +187,19 @@ values	(1, 'https://imagedelivery.net/4fYuQyy-r8_rpBpcY7lH_A/falabellaCL/1564340
 		(7, 'https://cdnx.jumpseller.com/notebook-store/image/43498618/resize/540/540?1702411144'),
 		(7, 'https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjQ3Njh8aW1hZ2UvanBlZ3xoMzMvaGQxLzEwNjc0NTg2MzUzNjk0LmpwZ3w4MGUyZGY0Y2FiZGMzYmMzN2IxZDAxNTVkOTJkN2E1OTkwNjg1NmVlOTU3MzQ0ZDc5MWUxZTg3NWM4ZTU3MmI4/lenovo-laptop-thinkpad-x1-carbon-gen8-subseries-gallery-2.jpg'),
 		(8, 'https://imagedelivery.net/4fYuQyy-r8_rpBpcY7lH_A/falabellaCL/135776764_01/w=1500,h=1500,fit=pad');
+go
 
+CREATE TABLE Tarjetas (
+    NumeroTarjeta CHAR(16) NOT NULL PRIMARY KEY, 
+    Saldo DECIMAL(10, 2) NOT NULL,              
+    FechaVencimiento VARCHAR(7) NOT NULL,       
+    CodigoSeguridad CHAR(3) NOT NULL            
+);
+insert into Tarjetas (NumeroTarjeta,Saldo,FechaVencimiento,CodigoSeguridad) 
+values
+('1111222233334444',700,'11/2025','007'),
+('2222444466668888',400,'12/2024','001'),
+('3333666655554444',15000,'07/2027','789')
 /*
 drop procedure NuevoUsuario
 drop procedure NuevoCliente

@@ -51,6 +51,7 @@
     <Compile Include="ElementoCarrito.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="Pedido.cs" />
+    <Compile Include="Tarjeta.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Imagen.cs" />
     <Compile Include="Marca.cs" />

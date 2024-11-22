@@ -114,6 +114,15 @@ namespace TP_Cuatrimestral_equipo_20A
         protected global::System.Web.UI.WebControls.Button btnPagar;
 
         /// <summary>
+        /// Control lblSaldo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSaldo;
+
+        /// <summary>
         /// Propiedad Master.
         /// </summary>
         /// <remarks>
