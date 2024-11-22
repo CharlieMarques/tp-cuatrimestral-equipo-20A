@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <div class="row mx-auto">
-            <div class="col-6">
+            <div class="col-5">
                 <asp:GridView runat="server" ID="dgvCompra" CssClass="table" DataKeyNames="_codigoProducto" AutoGenerateColumns="false">
                     <Columns>
                         <asp:BoundField HeaderText="Nombre Del Producto" DataField="_Producto.nombre" />
@@ -16,6 +16,9 @@
                         <asp:BoundField HeaderText="Precio Total" DataField="PrecioTotal" DataFormatString="{0:C}" />
                     </Columns>
                 </asp:GridView>
+                       <div class="col-12 container-PrecioTotal" style="padding-left:2px;padding-right:2px">
+           <asp:Label ID="lblCostoTotal" runat="server" CssClass="form-control" style="background-color:dimgrey;color:white"></asp:Label>
+       </div>
             </div>
             <div class="col-5" style="background-color: whitesmoke">
                 <div class="card-body">

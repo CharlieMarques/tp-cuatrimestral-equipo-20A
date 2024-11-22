@@ -24,6 +24,15 @@ namespace TP_Cuatrimestral_equipo_20A
         protected global::System.Web.UI.WebControls.GridView dgvCompra;
 
         /// <summary>
+        /// Control lblCostoTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCostoTotal;
+
+        /// <summary>
         /// Control upMetodoPago.
         /// </summary>
         /// <remarks>

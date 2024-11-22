@@ -32,8 +32,8 @@ namespace TP_Cuatrimestral_equipo_20A
         {
             if (RBEnvio.Checked)
             {
-                ElementoCarrito elementoCarrito = (ElementoCarrito)Session["compra"];
-                compra.listaCompra.Add(elementoCarrito);
+                Carrito carrito = (Carrito)Session["compra"];
+                compra.listaCompra = carrito.listaCarrito;
                 compra.cliente = (Cliente)Session["cliente"];
                 compra.cuenta = (Cuenta)Session["cuenta"];
                 compra.CostoEnvio = 500;
@@ -45,8 +45,8 @@ namespace TP_Cuatrimestral_equipo_20A
 
                 if (Session["compra"] != null)
                 {
-                    ElementoCarrito elementoCarrito = (ElementoCarrito)Session["compra"];
-                    compra.listaCompra.Add(elementoCarrito);
+                    Carrito carrito = (Carrito)Session["compra"];
+                    compra.listaCompra = carrito.listaCarrito;
                     compra.cliente = (Cliente)Session["cliente"];
                     compra.cuenta = (Cuenta)Session["cuenta"];
                     compra.CostoEnvio = 0;
@@ -59,21 +59,23 @@ namespace TP_Cuatrimestral_equipo_20A
         public void loadProducto(decimal costoEntrega)
         {
             ElementoCarrito elementoCarrito = new ElementoCarrito();
+            Carrito carrito =new Carrito();
             try
             {
                 if (Session["compra"] != null)
                 {
-                    elementoCarrito = (ElementoCarrito)Session["compra"];
-                    decimal precioTotal = elementoCarrito.PrecioTotal + costoEntrega;
-                    string precio = (elementoCarrito._Producto.precio * elementoCarrito.Cantidad).ToString("C");
-                    if (elementoCarrito.Cantidad == 1)
+                    carrito = (Carrito)Session["compra"];
+                    decimal costo = carrito.listaCarrito.Sum(item => item.Cantidad * item._Producto.precio);
+                    decimal precioTotal = costo + costoEntrega;
+                    int cant = carrito.listaCarrito.Sum(item => item.Cantidad);
+                    if (cant == 1)
                     {
-                        lblProducto.Text = "Producto" + precio;
+                        lblProducto.Text = "Producto " + precioTotal.ToString("C");
                         lblPrecio.Text = "Pagás: $" + precioTotal.ToString("C");
                     }
-                    else if (elementoCarrito.Cantidad > 1)
+                    else if (cant > 1)
                     {
-                        lblProducto.Text = "Productos(" + elementoCarrito.Cantidad + ") " + precio;
+                        lblProducto.Text = "Productos(" + cant + ") " + precioTotal.ToString("C");
                         lblPrecio.Text = "Pagás: $" + precioTotal.ToString("C");
                     }
                 }

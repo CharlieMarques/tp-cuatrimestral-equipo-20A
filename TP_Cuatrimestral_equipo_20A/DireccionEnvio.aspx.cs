@@ -37,15 +37,15 @@ namespace TP_Cuatrimestral_equipo_20A
                 direccion.cuenta = (Cuenta)Session["cuenta"];
                 direccion.cliente = new Cliente();
                 direccion.cliente = (Cliente)Session["cliente"];
-                direccion.Id = RBNuevaDireccion.Checked ? direccionDB.agregarDireccion(direccion) : -1;               
+                direccion.Id = RBNuevaDireccion.Checked ? direccionDB.agregarDireccion(direccion) : -1;
                 Session.Add("direccion", direccion);
                 Response.Redirect("OrdenCompra.aspx", false);
 
             }
             catch (Exception ex)
             {
-                Session.Add("Error",ex.ToString());
-                Response.Redirect("Error.aspx",false);
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -64,34 +64,32 @@ namespace TP_Cuatrimestral_equipo_20A
             DireccionDB direccionDB = new DireccionDB();
             try
             {
-                
+
                 Cuenta cuenta = (Cuenta)Session["cuenta"];
                 Cliente cliente = (Cliente)Session["Cliente"];
                 int idCuenta = cuenta.Id;
-                int idCliente = cliente.Id; 
-                
-                listaDireccion = direccionDB.toList(idCuenta,idCliente);
-                if(listaDireccion != null)
+                int idCliente = cliente.Id;
+
+                listaDireccion = direccionDB.toList(idCuenta, idCliente);
+                if (listaDireccion != null)
                 {
-                    txtProvincia.Text = listaDireccion[0].Provincia.ToString();
-                    txtLocalidad.Text = listaDireccion[0].Localidad.ToString();
-                    txtCalle.Text = listaDireccion[0].Calle.ToString();
-                    txtNumero.Text = listaDireccion[0].Altura.ToString();
-                    txtCodigoPostal.Text = listaDireccion[0].CodigoPostal.ToString();
-                    txtReferencias.Text = listaDireccion[0].Referencia.ToString();
+                    txtProvincia.Text = listaDireccion[listaDireccion.Count() - 1].Provincia.ToString();
+                    txtLocalidad.Text = listaDireccion[listaDireccion.Count() - 1].Localidad.ToString();
+                    txtCalle.Text = listaDireccion[listaDireccion.Count() - 1].Calle.ToString();
+                    txtNumero.Text = listaDireccion[listaDireccion.Count() - 1].Altura.ToString();
+                    txtCodigoPostal.Text = listaDireccion[listaDireccion.Count() - 1].CodigoPostal.ToString();
+                    txtReferencias.Text = listaDireccion[listaDireccion.Count() - 1].Referencia.ToString();
                     activarDesactivarFormulario(true);
                 }
                 else
                 {
                     RBNuevaDireccion.Checked = true;
-                    //limpiarCampos();
+
                 }
             }
             catch (Exception ex)
             {
                 RBNuevaDireccion.Checked = true;
-                //Session.Add("Error", ex.ToString());
-                //Response.Redirect("Error.aspx", false);
             }
         }
         public void activarDesactivarFormulario(bool activar)

@@ -24,6 +24,15 @@ namespace TP_Cuatrimestral_equipo_20A
         protected global::System.Web.UI.UpdatePanel upPanel;
 
         /// <summary>
+        /// Control lblComprar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblComprar;
+
+        /// <summary>
         /// Control dgvCarrito.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace TP_Cuatrimestral_equipo_20A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPrecio;
+
+        /// <summary>
+        /// Control btnComprar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnComprar;
 
         /// <summary>
         /// Propiedad Master.

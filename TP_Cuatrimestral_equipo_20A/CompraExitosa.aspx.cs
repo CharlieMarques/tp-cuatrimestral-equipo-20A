@@ -18,6 +18,16 @@ namespace TP_Cuatrimestral_equipo_20A
                     if (Session["compraRetiro"]!= null)
                     {
                         lblMensaje.Text = "Te avisaremos cuando este disponible tu compra para retirar";
+                        Session.Remove("compraRetiro");
+                        Session.Remove("compra");
+                        Session.Remove("compraExitosa");
+                    }
+                    else if(Session["compraEnvio"] != null)
+                    {
+                        lblMensaje.Text = "Te avisaremos cuento este en camino";
+                        Session.Remove("compraEnvio");
+                        Session.Remove("compra");
+                        Session.Remove("compraExitosa");
                     }
                 }
                 else

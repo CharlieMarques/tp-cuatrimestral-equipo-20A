@@ -82,5 +82,27 @@ namespace TP_Cuatrimestral_equipo_20A
             btnCancerlar.Visible = boton;
         }
 
+        protected void btnComprar_Click(object sender, EventArgs e)
+        {
+            if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+            {
+                lblComprar.Text = "Debe iniciar sesion o registrarse para comprar";
+                return;
+            }
+            try
+            {
+                Carrito carrito = (Carrito)Session["carrito"];                
+                Session.Add("compra", carrito);
+                Response.Redirect("FormaEntrega.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error",ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+            
+
+        }
     }
 }

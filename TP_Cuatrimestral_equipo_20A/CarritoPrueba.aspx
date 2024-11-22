@@ -6,6 +6,7 @@
         <asp:UpdatePanel ID="upPanel" runat="server">
             <ContentTemplate>
         <div class="container" style="padding:50px; background-color: whitesmoke;">
+            <asp:Label Text="" runat="server" ID="lblComprar" CssClass="form-label text-bg-danger mb-3" />
             <asp:GridView runat="server" ID="dgvCarrito" cssClass="table" DataKeyNames="_codigoProducto" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvCarrito_SelectedIndexChanged" >
                 <Columns>
                     <asp:BoundField HeaderText="Codigo De Producto" DataField="_Producto.codigoProducto"/>
@@ -23,6 +24,9 @@
                 <div class="container-PrecioTotal" style="padding-left:650px;padding-right:285px">
                     <asp:Label ID="lblPrecio" runat="server" CssClass="form-control" style="background-color:dimgrey;color:white"></asp:Label>
                 </div>
+            <div>
+                <asp:Button Text="Comprar" runat="server" CssClass="btn btn-success" ID="btnComprar" OnClick="btnComprar_Click"/>
+            </div>
           </div>  
             </ContentTemplate>
         </asp:UpdatePanel>

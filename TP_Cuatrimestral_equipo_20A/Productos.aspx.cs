@@ -70,12 +70,13 @@ namespace TP_Cuatrimestral_equipo_20A
                 ElementoCarrito elementoCarrito = new ElementoCarrito();
                 elementoCarrito._Producto = producto;
                 elementoCarrito.Cantidad = int.Parse (ddlCantidad.Text);
-                Session.Add("Compra", elementoCarrito);
+                Carrito carrito = new Carrito();
+                carrito.listaCarrito.Add(elementoCarrito);
+                Session.Add("compra", carrito);
                 Response.Redirect("FormaEntrega.aspx", false);
             }
             catch (Exception ex )
             {
-
                 Session.Add("Error",ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
