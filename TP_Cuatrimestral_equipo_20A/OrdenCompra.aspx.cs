@@ -77,6 +77,8 @@ namespace TP_Cuatrimestral_equipo_20A
                         else
                         {
                             Session.Add("compraExitosa", compra);
+                            EfectuarCompra(compra);
+                            Session.Remove("carrito");
                             Response.Redirect("CompraExitosa.aspx", false);
                         }
                     }
@@ -92,6 +94,7 @@ namespace TP_Cuatrimestral_equipo_20A
                         else
                         {
                             Session.Add("compraExitosa", compra);
+                            EfectuarCompra(compra);                            
                             Response.Redirect("CompraExitosa.aspx", false);
                         }
                     }
@@ -101,6 +104,29 @@ namespace TP_Cuatrimestral_equipo_20A
             {
 
                 throw;
+            }
+        }
+        public void EfectuarCompra(Compra comp)
+        {
+            CompraDB compraDB = new CompraDB();
+            Compra compra = new Compra();
+            try
+            {
+                compra = comp;
+                compra.direccion = (Direccion)Session["direccion"];
+                compra.NumeroCompra = compraDB.guardarCompra(compra.cuenta.Id, compra.cliente.Id, compra.direccion.Id, 1);
+
+                for (int i=0;i<compra.listaCompra.Count();i++)
+                {
+                    compraDB.agregarProductosCompras(compra.NumeroCompra, compra.listaCompra[i]._Producto.id, compra.listaCompra[i].Cantidad);
+                }
+               
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

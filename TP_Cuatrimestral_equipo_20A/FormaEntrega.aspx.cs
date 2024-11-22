@@ -42,7 +42,8 @@ namespace TP_Cuatrimestral_equipo_20A
             }
             else if (RBRetiro.Checked)
             {
-
+                Direccion direccion = new Direccion();
+                DireccionDB direccionDB = new DireccionDB();
                 if (Session["compra"] != null)
                 {
                     Carrito carrito = (Carrito)Session["compra"];
@@ -50,6 +51,18 @@ namespace TP_Cuatrimestral_equipo_20A
                     compra.cliente = (Cliente)Session["cliente"];
                     compra.cuenta = (Cuenta)Session["cuenta"];
                     compra.CostoEnvio = 0;
+                    direccion.Provincia = "Buenos aires";
+                    direccion.Localidad = "Martinez";
+                    direccion.Calle = "Paraná";
+                    direccion.CodigoPostal = 1640;
+                    direccion.Altura = 3745;
+                    direccion.Referencia = "Unicenter";
+                    direccion.cuenta = new Cuenta();
+                    direccion.cliente = new Cliente();
+                    direccion.cuenta.Id = compra.cuenta.Id;
+                    direccion.cliente.Id = compra.cliente.Id;
+                    direccion.Id = direccionDB.agregarDireccion(direccion);
+                    Session.Add("direccion", direccion);
                     Session.Add("compraRetiro", compra);
                     Response.Redirect("OrdenCompra.aspx", false);
                 }

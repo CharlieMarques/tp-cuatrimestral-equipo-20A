@@ -195,11 +195,38 @@ CREATE TABLE Tarjetas (
     FechaVencimiento VARCHAR(7) NOT NULL,       
     CodigoSeguridad CHAR(3) NOT NULL            
 );
+go
 insert into Tarjetas (NumeroTarjeta,Saldo,FechaVencimiento,CodigoSeguridad) 
 values
 ('1111222233334444',700,'11/2025','007'),
 ('2222444466668888',400,'12/2024','001'),
 ('3333666655554444',15000,'07/2027','789')
+
+go
+
+CREATE TABLE Estados (
+    id INT PRIMARY KEY identity(1,1),                  
+    Descripcion VARCHAR(50) NOT NULL UNIQUE
+);
+go
+create table Compras (
+ NumeroCompra int Primary key identity(1,1),
+ idCliente int not null foreign key references Clientes(id),
+ idCuenta int not null foreign key references Cuentas(id),
+ idDireccion int not null foreign key references Direcciones(id),
+ idEstado int not null foreign key references Estados(id),
+ FechaCompra datetime not null default getdate(),
+ FechaEntrega datetime null
+);
+go
+create table CompraProductos(
+	numeroCompra int not null foreign key references Compras(NumeroCompra),
+	idProducto int not null foreign key references Productos(id),
+	Cantidad int not null check(Cantidad > 0),
+	primary key (numeroCompra, idProducto)
+);
+go
+
 /*
 drop procedure NuevoUsuario
 drop procedure NuevoCliente

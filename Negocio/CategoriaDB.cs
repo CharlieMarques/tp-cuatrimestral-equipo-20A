@@ -79,6 +79,10 @@ namespace Negocio
 
                 throw ex;
             }
+            finally
+            {
+                data.closeConnection();
+            }
         }
         public void eliminarCategoria(int idCategoria)
         {
@@ -92,6 +96,10 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                data.closeConnection();
             }
         }
     }

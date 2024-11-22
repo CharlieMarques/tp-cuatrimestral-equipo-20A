@@ -130,5 +130,36 @@ namespace Negocio
                 data.closeConnection();
             }
         }
+        public Cuenta getById(int Id)
+        {
+            AccesoDatos data =new AccesoDatos();
+            Cuenta cuenta = null;
+            try
+            {
+                data.setQuery("Select id,UserName,Email,Contraseña,nivelAcceso from Cuentas where id = @id");
+                data.setParameter("@id", Id);
+                data.read();
+                if(data.Reader.Read())
+                {
+                    cuenta.Id = (int)data.Reader["id"];
+                    cuenta.NombreUsuario = (string)data.Reader["UserName"];
+                    cuenta.Email = (string)data.Reader["Email"];
+                    cuenta.Contraseña = (string)data.Reader["Contraseña"];
+                    cuenta.NivelAcceso = (int)data.Reader["nivelAcceso"];
+                    return cuenta;
+                }
+                return cuenta;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                data.closeConnection();
+            }
+
+        }
     }
 }

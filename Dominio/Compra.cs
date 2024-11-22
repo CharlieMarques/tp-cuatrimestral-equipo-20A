@@ -9,7 +9,7 @@ namespace Dominio
 {
     public class Compra
     {
-        public int Id {  get; set; }
+        //public int Id {  get; set; }
         public int NumeroCompra { get; set; }
         public decimal CostoEnvio { get; set; }
         public List<ElementoCarrito> listaCompra;
@@ -17,6 +17,7 @@ namespace Dominio
         public Cliente cliente;
         public Estado estado;
         public Direccion direccion;
+        public DateTime fechaCompra;
         public Compra()
         { 
             listaCompra = new List<ElementoCarrito>();

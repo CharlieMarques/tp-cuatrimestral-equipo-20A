@@ -92,11 +92,39 @@ namespace Negocio
             finally
             {
                 data.closeConnection();
+            }                      
+        }
+        public Cliente getById(int Id)
+        {
+            AccesoDatos data = new AccesoDatos();
+            Cliente cliente = null;
+            try
+            {
+                data.setQuery("select id, nombre, apellido, nroDocumento, nroTelefono, idCuenta  from Clientes where id = @id");
+                data.setParameter("@id", Id);
+                data.read();
+                if(data.Reader.Read())
+                {
+                    cliente.cuenta = new Cuenta();
+                    cliente.Id = (int)data.Reader["id"];
+                    cliente.Nombre = (string)data.Reader["nombre"];
+                    cliente.Apellido = (string)data.Reader["apellido"];
+                    cliente.NroDocumento = (int)data.Reader["nroDocumento"];
+                    cliente.Telefono = (string)data.Reader["nroTelefono"];
+                    cliente.cuenta.Id = (int)data.Reader["id"];
+                    return cliente;
+                }
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            { 
+                data.closeConnection();
             }
 
-            
-
-            
         }
     }
 }

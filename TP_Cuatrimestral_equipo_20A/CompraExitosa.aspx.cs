@@ -20,6 +20,7 @@ namespace TP_Cuatrimestral_equipo_20A
                         lblMensaje.Text = "Te avisaremos cuando este disponible tu compra para retirar";
                         Session.Remove("compraRetiro");
                         Session.Remove("compra");
+                        Session.Remove("carrito");
                         Session.Remove("compraExitosa");
                     }
                     else if(Session["compraEnvio"] != null)
@@ -27,6 +28,7 @@ namespace TP_Cuatrimestral_equipo_20A
                         lblMensaje.Text = "Te avisaremos cuento este en camino";
                         Session.Remove("compraEnvio");
                         Session.Remove("compra");
+                        Session.Remove("carrito");
                         Session.Remove("compraExitosa");
                     }
                 }
