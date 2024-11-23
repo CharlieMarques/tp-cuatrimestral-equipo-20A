@@ -4,7 +4,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
     <div class="container" style="padding-top: 20px; max-width: 80%; background-color: whitesmoke">
         <div class="row" style="max-height: 700px; overflow-y: auto;">       
             <div class="col-md-6">
