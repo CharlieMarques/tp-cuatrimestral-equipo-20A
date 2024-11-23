@@ -13,15 +13,20 @@ namespace TP_Cuatrimestral_equipo_20A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            decimal costoEnvio = 500;
             if (!IsPostBack)
             {
+                if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+                {
+                    Response.Redirect("Default.aspx", false);
+                }               
                 if (Session["compraRetiro"] != null)
                 {
                     Dominio.Compra compra = (Dominio.Compra)Session["compraRetiro"];
                     dgvCompra.DataSource = compra.listaCompra;
                     dgvCompra.DataBind();
-                    decimal costo = compra.listaCompra.Sum(item => item.Cantidad * item._Producto.precio);
-                    costo += 500;
+                    decimal costo = compra.listaCompra.Sum(item => item.Cantidad * item._Producto.precio);               
+                    costo += costoEnvio;
                     lblCostoTotal.Text = "Costo total con retiro en tienda es de: " + costo.ToString("C");
                     Master.PageTitle = "Orden de Compra";
 
@@ -32,7 +37,7 @@ namespace TP_Cuatrimestral_equipo_20A
                     dgvCompra.DataSource = compra.listaCompra;
                     dgvCompra.DataBind();
                     decimal costo = compra.listaCompra.Sum(item => item.Cantidad * item._Producto.precio);
-                    costo += 500;
+                    costo += costoEnvio;
                     lblCostoTotal.Text = "Costo de Envio $500 , Pagas un total de: " + costo.ToString("C");
                     Master.PageTitle = "Orden de Compra";
                 }

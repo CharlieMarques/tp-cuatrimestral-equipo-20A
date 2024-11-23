@@ -48,6 +48,7 @@
     <Compile Include="CuentaDB.cs" />
     <Compile Include="DetallePedidoDB.cs" />
     <Compile Include="DireccionDB.cs" />
+    <Compile Include="EstadoDB.cs" />
     <Compile Include="ImagenDB.cs" />
     <Compile Include="MarcaDB.cs" />
     <Compile Include="PedidoDB.cs" />

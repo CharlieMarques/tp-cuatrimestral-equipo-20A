@@ -9,7 +9,7 @@ namespace Negocio
 {
     public class ClienteDB
     {
-        public void nuevoCliente(Cliente cliente,int id)
+        public int nuevoCliente(Cliente cliente,int id)
         {
             AccesoDatos data = new AccesoDatos();
             try
@@ -20,7 +20,7 @@ namespace Negocio
                 data.setParameter("@dni",cliente.NroDocumento);
                 data.setParameter("@telefono",cliente.Telefono);
                 data.setParameter("@idCuenta", id);
-                data.executeQuery();
+                return data.executeQueryScalar();
             }
             catch (Exception ex)
             {

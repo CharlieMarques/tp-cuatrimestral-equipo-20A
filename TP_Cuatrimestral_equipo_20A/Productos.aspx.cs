@@ -12,7 +12,7 @@ namespace TP_Cuatrimestral_equipo_20A
     public partial class Productos : System.Web.UI.Page
     {
         public Producto producto = new Producto();
-        public ProductoDB productoDB = new ProductoDB();     
+        public ProductoDB productoDB = new ProductoDB();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -57,10 +57,10 @@ namespace TP_Cuatrimestral_equipo_20A
         }
 
         protected void btnComprar_Click(object sender, EventArgs e)
-        {           
+        {
             try
             {
-                
+
                 if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
                 {
                     lblComprar.Text = "Debe iniciar sesion o registrarse para comprar";
@@ -69,15 +69,15 @@ namespace TP_Cuatrimestral_equipo_20A
                 producto = getProducto();
                 ElementoCarrito elementoCarrito = new ElementoCarrito();
                 elementoCarrito._Producto = producto;
-                elementoCarrito.Cantidad = int.Parse (ddlCantidad.Text);
+                elementoCarrito.Cantidad = int.Parse(ddlCantidad.Text);
                 Carrito carrito = new Carrito();
                 carrito.listaCarrito.Add(elementoCarrito);
                 Session.Add("compra", carrito);
                 Response.Redirect("FormaEntrega.aspx", false);
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
-                Session.Add("Error",ex.ToString());
+                Session.Add("Error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
         }
@@ -189,12 +189,43 @@ namespace TP_Cuatrimestral_equipo_20A
             {
                 Session.Add("Error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
-            }           
+            }
         }
 
         protected void btnQuitarCarrito_Click(object sender, EventArgs e)
         {
-
+            Carrito carrito = new Carrito();
+            ElementoCarrito elementoCarrito = new ElementoCarrito();
+            int idProd = -1;
+            try
+            {
+                if (Request.QueryString["id"] != null)
+                {
+                    idProd = int.Parse(Request.QueryString["id"]);
+                    if (Session["carrito"] != null)
+                    {
+                        carrito = (Carrito)Session["carrito"];
+                        if (carrito.listaCarrito.Exists(item => item._Producto.id == idProd))
+                        {
+                            carrito.listaCarrito.RemoveAll(item => item._Producto.id == idProd);
+                            Session["carrito"] = carrito;
+                        }
+                    }
+                }
+                if (this.Master is Master masterPage)
+                {
+                    masterPage.LoadCarrito();
+                    masterPage.UpdateTotals();
+                }
+                UPProductos.Update();
+                checkCarrito();
+                loadProductos();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

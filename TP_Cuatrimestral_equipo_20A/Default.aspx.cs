@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AppToolKit;
 using Dominio;
 using Negocio;
 
@@ -47,7 +48,8 @@ namespace TP_Cuatrimestral_equipo_20A
         protected void btnAgregarOtro_Click(object sender, EventArgs e)
         {
             string codProducto = ((Button)sender).CommandArgument;
-            agregarAlCarrito(codProducto);
+            eliminarCarrito(codProducto);
+           
         }
 
         protected void repRepetidor_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -108,5 +110,34 @@ namespace TP_Cuatrimestral_equipo_20A
             }
 
         }
+    public void eliminarCarrito(string codProducto)
+    {
+        Carrito carrito = new Carrito();
+        ElementoCarrito elementoCarrito = new ElementoCarrito();
+        try
+        {               
+                if (Session["carrito"] != null)
+                {
+                    carrito = (Carrito)Session["carrito"];
+                    if (carrito.listaCarrito.Exists(item => item._Producto.codigoProducto == codProducto))
+                    {
+                        carrito.listaCarrito.RemoveAll(item => item._Producto.codigoProducto == codProducto);
+                        Session["carrito"] = carrito;
+                    }
+                }
+            if (this.Master is Master masterPage)
+            {
+                masterPage.LoadCarrito();
+                masterPage.UpdateTotals();
+            }
+            UPDefault.Update();
+            LoadProductos();
+        }
+        catch (Exception ex)
+        {
+            Session.Add("Error", ex.ToString());
+            Response.Redirect("Error.aspx", false);
+        }
+    }
     }
 }

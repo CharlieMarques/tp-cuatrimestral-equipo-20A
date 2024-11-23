@@ -209,6 +209,14 @@ CREATE TABLE Estados (
     Descripcion VARCHAR(50) NOT NULL UNIQUE
 );
 go
+INSERT INTO Estados (Descripcion)
+VALUES 
+('En preparación'),
+('Listo para retirar'),
+('Despachado'),
+('En camino'),
+('Entregado/Retirado');
+go
 create table Compras (
  NumeroCompra int Primary key identity(1,1),
  idCliente int not null foreign key references Clientes(id),
@@ -264,7 +272,7 @@ create procedure NuevoCliente
 @idCuenta int
 as
 begin 
-insert into Clientes(Nombre,Apellido,nroDocumento,nroTelefono,idCuenta) values (@nombre,@apellido,@dni,@telefono,@idCuenta)
+insert into Clientes(Nombre,Apellido,nroDocumento,nroTelefono,idCuenta) values (@nombre,@apellido,@dni,@telefono,@idCuenta);SELECT SCOPE_IDENTITY()
 end
 
 go

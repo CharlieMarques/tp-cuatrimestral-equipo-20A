@@ -112,5 +112,19 @@ namespace TP_Cuatrimestral_equipo_20A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnContinuar;
+
+        /// <summary>
+        /// Propiedad Master.
+        /// </summary>
+        /// <remarks>
+        /// Propiedad generada automáticamente.
+        /// </remarks>
+        public new TP_Cuatrimestral_equipo_20A.Master Master
+        {
+            get
+            {
+                return ((TP_Cuatrimestral_equipo_20A.Master)(base.Master));
+            }
+        }
     }
 }

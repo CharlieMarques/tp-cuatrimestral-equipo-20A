@@ -37,7 +37,7 @@ namespace TP_Cuatrimestral_equipo_20A
                 direccion.cuenta = (Cuenta)Session["cuenta"];
                 direccion.cliente = new Cliente();
                 direccion.cliente = (Cliente)Session["cliente"];
-                direccion.Id = RBNuevaDireccion.Checked ? direccionDB.agregarDireccion(direccion) : -1;
+                direccion.Id = RBNuevaDireccion.Checked ? direccionDB.agregarDireccion(direccion) :11;
                 Session.Add("direccion", direccion);
                 Response.Redirect("OrdenCompra.aspx", false);
 

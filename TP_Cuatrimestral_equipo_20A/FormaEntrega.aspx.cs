@@ -22,6 +22,7 @@ namespace TP_Cuatrimestral_equipo_20A
                 {
                     Response.Redirect("Default.aspx", false);
                 }
+                Master.PageTitle = "Seleccion tipo de entrega";
                 RBRetiro.Checked = true;
                 lblPrecioEnvio.Text = "Costo de Retiro: $0";
                 loadProducto(0);
@@ -32,9 +33,11 @@ namespace TP_Cuatrimestral_equipo_20A
         {
             if (RBEnvio.Checked)
             {
+                ClienteDB clienteDB = new ClienteDB();
+                Session.Remove("direccion");
                 Carrito carrito = (Carrito)Session["compra"];
                 compra.listaCompra = carrito.listaCarrito;
-                compra.cliente = (Cliente)Session["cliente"];
+                compra.cliente = (Cliente)Session["cliente"];                
                 compra.cuenta = (Cuenta)Session["cuenta"];
                 compra.CostoEnvio = 500;
                 Session.Add("compraEnvio", compra);

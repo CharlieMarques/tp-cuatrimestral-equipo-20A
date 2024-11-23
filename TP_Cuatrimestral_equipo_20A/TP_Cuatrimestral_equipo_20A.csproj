@@ -87,6 +87,7 @@
     <Content Include="Default.aspx" />
     <Content Include="DireccionEnvio.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="EstadoCompra.aspx" />
     <Content Include="FormaEntrega.aspx" />
     <Content Include="FormularioProducto.aspx" />
     <Content Include="Global.asax" />
@@ -146,6 +147,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoCompra.aspx.cs">
+      <DependentUpon>EstadoCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EstadoCompra.aspx.designer.cs">
+      <DependentUpon>EstadoCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormaEntrega.aspx.cs">
       <DependentUpon>FormaEntrega.aspx</DependentUpon>

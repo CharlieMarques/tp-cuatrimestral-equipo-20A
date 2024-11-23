@@ -13,6 +13,11 @@ namespace TP_Cuatrimestral_equipo_20A
         {
             if(!IsPostBack)
             {
+                Master.PageTitle = "Tu compra se realizo correctamente";
+                if (!(AppToolKit.Session.sessionActiva(Session["cuenta"])))
+                {
+                    Response.Redirect("Default.aspx", false);
+                }
                 if (Session["compraExitosa"]!= null)
                 {
                     if (Session["compraRetiro"]!= null)

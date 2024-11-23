@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -86,27 +87,62 @@ namespace Negocio
                 data.closeConnection();
             }
         }
+        public Compra infoCompra(int nroCompra)
+        {
+            AccesoDatos data = new AccesoDatos();             
+            try
+            {
+                data.setQuery("select C.numeroCompra numeroCompra,C.FechaCompra FechaCompra,C.idCliente idCliente,C.idEstado idEstado, E.Descripcion estado from Compras C inner join Estados E on c.IdEstado = E.id where C.NumeroCompra = @numeroCompra");
+                data.setParameter("@numeroCompra", nroCompra);
+                data.read();
+                if(data.Reader.Read())
+                {
+                    Compra compra = new Compra();
+                    compra.NumeroCompra = (int)data.Reader["NumeroCompra"];
+                    compra.fechaCompra = (DateTime)data.Reader["FechaCompra"];
+                    compra.cliente = new Cliente();
+                    compra.cliente.Id = (int)data.Reader["idCliente"];
+                    compra.estado = new Estado();
+                    compra.estado.Id = (int)data.Reader["idEstado"];
+                    compra.estado.Descripcion = (string)data.Reader["estado"];
+                    return compra;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public Compra mostrarCompra(int nroCompra)
         {
             AccesoDatos data = new AccesoDatos();
             Compra compra = new Compra();
             try
             {
-                data.setQuery("SELECT c.NumeroCompra, c.FechaCompra, c.FechaEntrega, cl.Nombre AS Cliente, e.Descripcion AS Estado, p.Nombre AS Producto,cp.Cantidad " +
-                    " FROM Compras c " +
-                    " INNER JOIN Clientes cl ON c.idCliente = cl.id " +
-                    "INNER JOIN Estados e ON c.idEstado = e.id " +
-                    "INNER JOIN CompraProductos cp ON c.NumeroCompra = cp.numeroCompra " +
-                    "INNER JOIN Productos p ON cp.idProducto = p.id " +
-                    "WHERE c.NumeroCompra = @numeroCompra");
+                data.setQuery("SELECT c.NumeroCompra, c.FechaCompra, c.FechaEntrega, " +
+                              " cl.id AS ClienteId, cl.Nombre AS ClienteNombre, " +
+                                 "e.id AS EstadoId, e.Descripcion AS Estado, " +
+                                "p.Nombre AS Producto, cp.Cantidad " +
+                                "FROM Compras c " +
+                                "INNER JOIN Clientes cl ON c.idCliente = cl.id " +
+                                "INNER JOIN Estados e ON c.idEstado = e.id " +
+                                "INNER JOIN CompraProductos cp ON c.NumeroCompra = cp.numeroCompra " +
+                                "INNER JOIN Productos p ON cp.idProducto = p.id " +
+                                "WHERE c.NumeroCompra = @numeroCompra ");
+                data.setParameter("@numeroCompra", nroCompra);
                 data.read();
-                if(data.Reader.Read())
+                if (data.Reader.Read())
                 {
                     compra.NumeroCompra = (int)data.Reader["NumeroCompra"];
                     compra.cliente = new Cliente();
-                    compra.cliente.Id = (int)data.Reader["Cliente"];
-                    compra.estado.Id = (int)data.Reader["Estado"];
-                    compra.fechaCompra = (DateTime)data.Reader["FechaCompra"];
+                    compra.cliente.Id = (int)data.Reader["ClienteId"];
+                    compra.estado = new Estado();
+                    compra.estado.Id = (int)data.Reader["EstadoId"];
+                    compra.estado.Descripcion = (string)data.Reader["Estado"];
+                    compra.fechaCompra = (DateTime)data.Reader["FechaCompra"];                    
                     return compra;
                 }
                 return null;
@@ -124,8 +160,8 @@ namespace Negocio
         }
         public List<ElementoCarrito> listaCompra(int nroCompra)
         {
-            AccesoDatos data =new AccesoDatos();
-            List<ElementoCarrito>listaECarrito = new List<ElementoCarrito>();
+            AccesoDatos data = new AccesoDatos();
+            List<ElementoCarrito> listaECarrito = new List<ElementoCarrito>();
             ElementoCarrito aux = new ElementoCarrito();
 
             try
@@ -133,8 +169,9 @@ namespace Negocio
                 data.setQuery("Select idProducto, Cantidad from CompraProductos where numeroCompra = @numeroCompra");
                 data.setParameter("@numeroCompra", nroCompra);
                 data.read();
-                while(data.Reader.Read())
+                while (data.Reader.Read())
                 {
+                    aux._Producto = new Producto();
                     aux._Producto.id = (int)data.Reader["idProducto"];
                     aux.Cantidad = (int)data.Reader["Cantidad"];
                     listaECarrito.Add(aux);

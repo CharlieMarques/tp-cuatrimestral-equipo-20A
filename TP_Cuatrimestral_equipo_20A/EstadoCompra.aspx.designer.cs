@@ -11,26 +11,17 @@ namespace TP_Cuatrimestral_equipo_20A
 {
 
 
-    public partial class Categorias
+    public partial class EstadoCompra
     {
 
         /// <summary>
-        /// Control UPCategoria.
+        /// Control lblPrueba.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPCategoria;
-
-        /// <summary>
-        /// Control repRepetidor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repRepetidor;
+        protected global::System.Web.UI.WebControls.Label lblPrueba;
 
         /// <summary>
         /// Propiedad Master.

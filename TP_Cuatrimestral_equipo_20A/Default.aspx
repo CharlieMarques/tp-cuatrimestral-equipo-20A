@@ -66,7 +66,7 @@
                                                 </div>
                                                 <div class="col align-self-start">
                                                     <asp:Button Text="Agregar al carrito" ID="btnAgregarCarrito" CssClass="btn btn-outline-success" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarCarrito_Click" runat="server" />
-                                                    <asp:Button Text="Agregar otro" ID="btnAgregarOtro" CssClass="btn btn-outline-success" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarOtro_Click" runat="server" />
+                                                    <asp:Button Text="Quitar del carrito" ID="btnAgregarOtro" CssClass="btn btn-outline-danger" CommandArgument='<%#Eval("codigoProducto") %>' CommandName="codigoProducto" OnClick="btnAgregarOtro_Click" runat="server" />
                                                 </div>
                                             </div>
                                         </div>
