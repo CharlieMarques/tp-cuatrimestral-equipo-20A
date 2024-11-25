@@ -117,8 +117,15 @@ values
 ('Moderador', 'mod@mod.com', 'moderador',2),
 ('Usuario','User@usuario.com', 'usuario',1)
 go
-
-create table PEDIDOS (
+insert into Clientes(Nombre,Apellido,nroDocumento,nroTelefono,idCuenta)
+values
+('Admin','Istrador',17180190,1122334455,1),
+('Mode','Rador',18160150,1177889944,2),
+('Usu','Ario',19140130,1155664477,1);
+go
+select * from clientes
+delete from Clientes where id =15
+/*create table PEDIDOS (
     Id int identity(1,1) not null primary key,
     IdCuenta int not null,
     Fecha datetime not null default getdate(),
@@ -155,7 +162,7 @@ values
     (3, 5, 1, 1149.99, 1149.99), -- Pedido 3, Producto: HP Spectre x360
     (4, 4, 1, 1299.99, 1299.99), -- Pedido 4, Producto: Dell XPS 13
     (4, 7, 1, 999.99, 999.99); -- Pedido 4, Producto: Lenovo ThinkPad X1
-go
+go*/
 
 create table IMAGENES(
 	Id int identity(1,1) not null primary key,
