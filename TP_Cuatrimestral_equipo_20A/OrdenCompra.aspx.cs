@@ -78,6 +78,7 @@ namespace TP_Cuatrimestral_equipo_20A
                         if (costo >= tarjetita.Saldo)
                         {
                             lblSaldo.Text = "Saldo Insuficiente";
+                            return;
                         }
                         else
                         {
@@ -95,6 +96,7 @@ namespace TP_Cuatrimestral_equipo_20A
                         if (costo >= tarjetita.Saldo)
                         {
                             lblSaldo.Text = "Saldo Insuficiente";
+                            return;
                         }
                         else
                         {
