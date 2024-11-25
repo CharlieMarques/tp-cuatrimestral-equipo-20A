@@ -70,7 +70,7 @@ namespace Negocio
             AccesoDatos data = new AccesoDatos();
             try
             {
-                data.setQuery("insert into Categorias Descripcion values @descripcion");
+                data.setQuery("insert into Categorias (Descripcion) values (@descripcion)");
                 data.setParameter("@descripcion", descripcion);
                 data.executeQuery();
             }
@@ -100,6 +100,21 @@ namespace Negocio
             finally
             {
                 data.closeConnection();
+            }
+        }
+        public void modificarCategoria(int id,string descripcion)
+        {
+            AccesoDatos data = new AccesoDatos();
+            try
+            {
+                data.setQuery("Update Categorias set Descripcion = @descripcion where id = @id");
+                data.setParameter("@id", id);
+                data.setParameter("@decripcion", descripcion);
+                data.executeQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
